@@ -79,4 +79,4 @@ Napraviti bazu koja ima ime *DevicesDB* i u njoj napraviti kolekciju *PowerUsage
 
 ## Prosumer aplikacija
 
-1. Ponovoti sve tacke kao za DSO aplikaciju samo sto treba promeniti ime foldera koji se pravi na serveru, kao i broj porta na kojem ce aplikacija da radi.
+1. Ponoviti sve tacke kao za DSO aplikaciju, samo sto treba promeniti ime foldera koji se pravi na serveru, kao i broj porta na kojem ce aplikacija da radi.

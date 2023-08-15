@@ -1,0 +1,29 @@
+h6 {
+  color: #466471;
+}
+
+.realization2btn.active {
+  background-color: #ccdee9 !important;
+  border-color: #5875a1;
+  color: #5875a1 !important;
+}
+.realization2btn:not(.active) {
+  background-color: #5875a1;
+  border-color: #5875a1;
+}
+.btn:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+.btn-close {
+  color: white;
+  background-color: white;
+}
+.btn-primary {
+  background-color: #5875a1;
+  border-color: #5875a1;
+}
+#realizationProsumerConsumptionTableLabel
+{
+  color: white;
+}

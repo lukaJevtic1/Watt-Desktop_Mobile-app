@@ -1,0 +1,122 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0)"
+  size="medium"
+  color="black"
+  type="ball-clip-rotate"
+  [showSpinner]="show"
+  [fullScreen]="false"
+  *ngIf="show"
+></ngx-spinner>
+<div
+  class="card-header col-12 group"
+  style="
+    margin-left: 0;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    padding-left: 3%;
+  "
+>
+  <div class="col-3 p-1" style="display: flex; align-items: center">
+    <h6 class="m-0 font-weight-bold ps-2">
+      Prediction  &nbsp;<button
+        class="btn btn-outline-primary p-0 px-1 m-0"
+        data-bs-toggle="modal"
+        data-bs-target="#predictionDeviceTable"
+      >
+        <i class="fa fa-table"></i>
+      </button>
+    </h6>
+  </div>
+  <div class="col-9" style="display: flex; justify-content: right">
+    <button
+      class="btn btn-primary m-1 predictionDeviceBtns"
+      id="predictionDevice1"
+      (click)="Prediction1Day('predictionDevice1')"
+    >
+      24H
+    </button>
+    <button
+      class="btn btn-primary m-1 predictionDeviceBtns"
+      id="predictionDevice2"
+      (click)="Prediction3Days('predictionDevice2')"
+    >
+      3 Days
+    </button>
+    <button
+      class="btn btn-primary m-1 predictionDeviceBtns"
+      id="predictionDevice3"
+      (click)="PredictionWeek('predictionDevice3')"
+    >
+      1 Week
+    </button>
+  </div>
+</div>
+<div class="card-body" style="width: 100%; margin: 0 auto">
+  <div
+    class="w-100 px-0 py-0 mx-0 my-0"
+    style="display: flex; justify-content: center; align-items: center"
+    id="predikcija"
+  >
+    <h1
+      *ngIf="data.length == 0"
+      style="
+        text-align: center;
+        margin-top: 15%;
+        opacity: 60%;
+        font-style: italic;
+        font-weight: normal;
+        z-index: 100;
+      "
+    >
+      There Is No Available Data
+    </h1>
+    <canvas
+      *ngIf="data.length != 0"
+      id="chartDevicePrediction"
+      style="height: 100% !important; width: 100% !important"
+    ></canvas>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="predictionDeviceTable"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="predictionDeviceTableLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #5875a1">
+        <h5 class="modal-title" id="predictionDeviceTableLabel">
+          Prediction for {{ type }} Table
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body pt-0"
+        style="overflow-x: hidden; overflow-y: auto"
+        id="modalFadePredictionDevice"
+      >
+        <app-prediction-device-table
+          [type]="type"
+          [data]="data"
+        ></app-prediction-device-table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="exportTable()">
+          Export Table
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

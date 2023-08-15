@@ -1,0 +1,136 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0)"
+  size="medium"
+  color="black"
+  type="ball-clip-rotate"
+  [showSpinner]="show"
+  [fullScreen]="false"
+  *ngIf="show"
+></ngx-spinner>
+<div class="card-header">
+  <div class="row">
+    <div
+      class="col-md-5"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+      "
+    >
+      <h6 class="m-0 font-weight-bold ps-2">
+        Prediction &nbsp;<button
+          class="btn btn-outline-primary p-0 px-1 m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#predictionProsumerTable"
+        >
+          <i class="fa fa-table"></i>
+        </button>
+      </h6>
+    </div>
+    <div
+      class="col-md-7 mx-0 my-0"
+      style="display: flex; justify-content: right; margin: 0px 0px 2px auto"
+    >
+      <button
+        id="predictionUser1"
+        (click)="PredictionDay('predictionUser1')"
+        style="margin: 1px"
+        type="button"
+        class="btn btn-primary prediction2btn"
+      >
+        24H
+      </button>
+      <button
+        id="predictionUser2"
+        (click)="Prediction3Days('predictionUser2')"
+        style="margin: 1px"
+        type="button"
+        class="btn btn-primary prediction2btn"
+      >
+        3 Days
+      </button>
+      <button
+        id="predictionUser3"
+        (click)="PredictionWeek('predictionUser3')"
+        type="button"
+        style="margin: 1px"
+        class="btn btn-primary prediction2btn"
+      >
+        Week
+      </button>
+    </div>
+  </div>
+</div>
+<div class="card-body px-3 py-0 mx-0 my-0 pt-3" id="predictionUserInfoCardBody">
+  <div
+    style="
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    "
+  >
+    <h1
+      *ngIf="data.length == 0"
+      style="
+        text-align: center;
+        opacity: 60%;
+        font-style: italic;
+        font-weight: normal;
+        z-index: 100;
+      "
+    >
+      There Is No Available Data
+    </h1>
+    <canvas
+      *ngIf="data.length != 0"
+      id="chartCanvas1"
+      style="height: 100% !important; width: 100% !important"
+    ></canvas>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="predictionProsumerTable"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="predictionProsumerTableLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #5875a1">
+        <h5 class="modal-title" id="predictionProsumerTableLabel">
+          Prediction Table
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body pt-0"
+        style="overflow-x: hidden; overflow-y: auto"
+        id="modalFadePredictionProsumer"
+      >
+        <app-prediction-prosumer-table
+          [data]="data"
+        ></app-prediction-prosumer-table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="exportTable(data)"
+        >
+          Export Table
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

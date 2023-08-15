@@ -1,0 +1,148 @@
+<div
+  class="row filters d-flex justify-content-center align-items-center h-100 w-100 px-0 py-0 mx-0 my-0"
+  style="background-color: #5875a1"
+  id="sideSidebar"
+>
+  <div
+    class="header text-white ps-4 mx-0 my-0"
+    style="height: 5%; display: flex; align-items: center"
+  >
+    <i class="fa fa-lg fa-filter me-1" style="font-size: 1.5rem"></i>
+    <span class="fs-4" style="font-size: 1.3rem">&nbsp;Filters</span>
+  </div>
+  <hr style="background-color: white; color: white" />
+  <div
+    class="body text-white text-center"
+    style="
+      height: 75%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    "
+  >
+    <!-- cities -->
+    <div class="w-100 text-start">
+      <p class="mb-0" style="padding-left: 10%"><strong>City</strong></p>
+      <select
+        style="width: 85%; margin: 0 auto"
+        class="form-select mb-3"
+        name="Neighborhood"
+        (change)="ChangeCity($event)"
+        [(ngModel)]="city"
+      >
+        <option value="-1">All</option>
+        <option *ngFor="let c of cities" [value]="c.id">
+          {{ c.cityName }}
+        </option>
+      </select>
+    </div>
+
+    <!-- neighborhoods -->
+    <div class="w-100 text-start" style="margin-bottom: 6%">
+      <p class="mb-0" style="padding-left: 10%">
+        <strong>Neighborhood</strong>
+      </p>
+      <select
+        class="dropdown dropdown-toggle"
+        style="width: 85%; margin: 0 auto"
+        name="Neighborhood"
+        (change)="ChangeNeighborhood($event)"
+        class="form-control"
+        [(ngModel)]="neighborhood"
+        [disabled]="disableNeigh"
+      >
+        <option value="all">All</option>
+        <option
+          *ngFor="let neighborhood of Neighborhoods"
+          [value]="neighborhood.id"
+        >
+          {{ neighborhood.neigbName }}
+        </option>
+      </select>
+    </div>
+
+    <!-- power consumption -->
+    <div class="w-100 sliderDivs" style="margin-bottom: 5%">
+      <p class="mb-0 text-start" style="padding-left: 10%">
+        <strong>Power Consumption</strong>
+      </p>
+      <div class="custom-slider" style="width: 80%; margin: 0 auto">
+        <ngx-slider
+          [(value)]="minValueC"
+          [(highValue)]="maxValueC"
+          [options]="optionsC"
+        ></ngx-slider>
+      </div>
+      min<input class="button1" type="text" [(ngModel)]="minValueC" />
+      <input class="button2" type="text" [(ngModel)]="maxValueC" />max
+    </div>
+
+    <!-- power production -->
+    <div class="w-100 sliderDivs" style="margin-bottom: 5%">
+      <p class="mb-0 text-start" style="padding-left: 10%">
+        <strong>Power Production</strong>
+      </p>
+      <div class="custom-slider" style="width: 80%; margin: 0 auto">
+        <ngx-slider
+          [(value)]="minValueP"
+          [(highValue)]="maxValueP"
+          [options]="optionsP"
+        ></ngx-slider>
+      </div>
+      min<input class="button1" type="text" [(ngModel)]="minValueP" />
+      <input class="button2" type="text" [(ngModel)]="maxValueP" />max
+    </div>
+
+    <!-- number of devices -->
+    <div class="w-100 sliderDivs" style="margin-bottom: 2%">
+      <p class="mb-0 text-start" style="padding-left: 10%">
+        <strong>Number of Devices</strong>
+      </p>
+      <div class="custom-slider" style="width: 80%; margin: 0 auto">
+        <ngx-slider
+          [(value)]="minValue"
+          [(highValue)]="maxValue"
+          [options]="options"
+        ></ngx-slider>
+      </div>
+      min<input class="button1" type="text" [(ngModel)]="minValue" />
+      <input class="button2" type="text" [(ngModel)]="maxValue" />max
+    </div>
+  </div>
+  <div
+    class="footer"
+    style="
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 15%;
+    "
+  >
+    <button
+      class="btn btn-primary"
+      style="
+        margin-bottom: 3%;
+        background-color: rgba(3, 61, 122, 0.7);
+        border-color: rgb(3, 50, 100);
+      "
+      (click)="filter()"
+      [disabled]="disableFiltering"
+    >
+      Apply Filters
+    </button>
+    <button
+      class="btn btn-primary"
+      (click)="reset()"
+      style="
+        background-color: rgba(141, 2, 2, 0.7);
+        border-color: rgba(141, 2, 2);
+        color: white;
+      "
+      [disabled]="disableFiltering"
+    >
+      Reset Filters
+    </button>
+  </div>
+</div>

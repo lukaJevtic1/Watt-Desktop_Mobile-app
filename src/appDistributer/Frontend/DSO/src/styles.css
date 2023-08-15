@@ -1,0 +1,82 @@
+@import "~leaflet/dist/leaflet.css";
+html,
+body {
+  min-height: 100vh;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+* {
+  box-sizing: border-box;
+}
+input[type="radio"] {
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.custom-slider .ngx-slider .ngx-slider-bar {
+  background: blue;
+  height: 2px;
+}
+.custom-slider .ngx-slider .ngx-slider-selection {
+  background: blue;
+}
+
+.custom-slider .ngx-slider .ngx-slider-pointer {
+  width: 8px;
+  height: 16px;
+  top: auto; /* to remove the default positioning */
+  bottom: 0;
+  background-color: blue;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
+}
+
+.custom-slider .ngx-slider .ngx-slider-pointer:after {
+  display: none;
+}
+
+.custom-slider .ngx-slider .ngx-slider-bubble {
+  color: white;
+  bottom: 14px;
+}
+
+.custom-slider .ngx-slider .ngx-slider-limit {
+  font-weight: bold;
+  color: blue;
+}
+
+.custom-slider .ngx-slider .ngx-slider-tick {
+  width: 1px;
+  height: 10px;
+  margin-left: 4px;
+  border-radius: 0;
+  background: blue;
+  top: -1px;
+}
+
+.custom-slider .ngx-slider .ngx-slider-tick.ngx-slider-selected {
+  background: blue;
+}
+
+.mat-mdc-checkbox
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:checked
+  ~ .mdc-checkbox__background,
+.mat-mdc-checkbox
+  .mdc-checkbox
+  .mdc-checkbox__native-control:enabled:indeterminate
+  ~ .mdc-checkbox__background,
+.mat-mdc-checkbox
+  .mdc-checkbox
+  .mdc-checkbox__native-control[data-indeterminate="true"]:enabled
+  ~ .mdc-checkbox__background {
+  border-color: var(
+    --mdc-checkbox-selected-hover-icon-color,
+    var(--mdc-theme-secondary, #018786)
+  );
+  background-color: var(
+    --mdc-checkbox-selected-hover-icon-color,
+    var(--mdc-theme-secondary, white)
+  );
+}

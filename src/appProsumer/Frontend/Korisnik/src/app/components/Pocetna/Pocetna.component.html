@@ -1,0 +1,200 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.95)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate"
+  [showSpinner]="true"
+  [fullScreen]="true"
+  [zIndex]="9999"
+  ><p style="font-size: 25px; color: white">Loading Data...</p></ngx-spinner
+>
+<div id="wrapper">
+  <div id="content-wrapper" class="d-flex flex-column">
+    <div id="content">
+      <div class="container-fluid pt-3">
+        <div class="row">
+          <div class="col-xl-6 ">
+            <div class="card shadow mb-4">
+              <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                style="background-color: rgb(177, 209, 193, 0.08)"
+              >
+                <h6 class="m-0 font-weight-bold">Your Home</h6>
+              </div>
+              <app-house
+                #house
+                (deviceOffOn)="onDeviceTurnedOffOn($event)"
+              ></app-house>
+            </div>
+          </div>
+
+          <div class="col-xl-6 ">
+            <div class="card shadow mb-4">
+              <div
+                class="card-header py-3 d-flex flex-row align-items-center justify-content-between"
+                style="background-color: rgb(177, 209, 193, 0.08)"
+              >
+                <h6 class="m-0 font-weight-bold">Active Devices Status</h6>
+              </div>
+              <app-devices-status #devicesStatus> </app-devices-status>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div
+              class="card border-left-primary shadow h-100 py-2"
+              style="
+                background-color: rgb(177, 209, 193, 0.19);
+                border-left: 5px solid rgb(177, 209, 193);
+              "
+            >
+              <div class="card-body kartice">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="text-xs font-weight-bold text-success text-uppercase mb-1"
+                    >
+                      <!-- success -->
+                      Device Count
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      {{ numOfDevices }}
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fa fa-home fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div
+              class="card border-left-success shadow h-100 py-2"
+              style="
+                background-color: rgb(177, 209, 193, 0.19);
+                border-left: 5px solid rgb(177, 209, 193);
+              "
+            >
+              <div class="card-body kartice">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="text-xs font-weight-bold text-warning text-uppercase mb-1"
+                    >
+                      <!-- warning -->
+                      Active Devices
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      {{ numOfActiveDevices }}
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fa fa-cogs fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div
+              class="card border-left-info shadow h-100 py-2"
+              style="
+                background-color: rgb(177, 209, 193, 0.19);
+                border-left: 5px solid rgb(177, 209, 193);
+              "
+            >
+              <div class="card-body kartice">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="text-xs font-weight-bold text-info text-uppercase mb-1"
+                    >
+                      <!-- info -->
+                      Lower/Higher tariff
+                    </div>
+                    <div class="row no-gutters align-items-center">
+                      <div class="col-auto">
+                        <div
+                          class="h5 mb-0 mr-3 font-weight-bold text-gray-800"
+                        >
+                          {{ tariff }}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fa fa-dashboard fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-xl-3 col-md-6 mb-4">
+            <div
+              class="card border-left-primary shadow h-100 py-2"
+              style="
+                background-color: rgb(177, 209, 193, 0.19);
+                border-left: 5px solid rgb(177, 209, 193);
+              "
+            >
+              <div class="card-body kartice">
+                <div class="row no-gutters align-items-center">
+                  <div class="col mr-2">
+                    <div
+                      class="text-xs font-weight-bold text-primary text-uppercase mb-1"
+                    >
+                      <!-- primary -->
+                      Electricity cost per kW
+                    </div>
+                    <div class="h5 mb-0 font-weight-bold text-gray-800">
+                      {{ currentPrice.toFixed(2) }} RSD
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <i class="fa fa-bolt fa-2x text-gray-300"></i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-5 mb-4">
+            <div class="card shadow">
+              <app-consumption-limit></app-consumption-limit>
+            </div>
+          </div>
+          <div class="col-xl-7 mb-4">
+            <div class="card shadow pb-2">
+              <app-realization-chart
+                #realizationConsumption
+              ></app-realization-chart>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xl-5 mb-4 order-sm-2 order-2 order-xl-1">
+            <div class="card shadow mb-1 pb-2">
+              <app-prediction-chart></app-prediction-chart>
+            </div>
+          </div>
+          <div class="col-xl-7 mb-4 oreder-sm-1 order-1 order-xl-2">
+            <div class="card shadow mb-1 pb-2">
+              <app-realization-chart-production
+                #realizationProduction
+              ></app-realization-chart-production>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-add-device></app-add-device>

@@ -1,0 +1,238 @@
+<section class="h-100 mx-0 my-0 px-0 py-0" style="border: 0;">
+  <div class="container-fluid h-100 px-0 py-0 mx-0 my-0">
+    <div
+      class="row d-flex justify-content-center align-items-start align-items-md-center mx-0 my-0 px-0 py-0 h-100"
+      style="overflow-x: hidden; overflow-y: auto;"
+    >
+      <div class="col px-0 mx-0 my-0 py-0 h-100" style="border: 0px;">
+        <div class="card h-100" style="border: 0">
+          <div
+            class="row g-0 h-100 justify-content-center align-items-start align-items-md-center px-0 py-0"
+          >
+            <div
+              class="col-md-8 justify-content-center align-items-center order-2 order-md-1 mx-0 my-0 px-0 py-0"
+            >
+              <div class="card-body p-1 p-md-4">
+                <div class="col-12 pt-2" style="width: 100%; display: flex;">
+                  <h6 class="section ps-3">Information</h6>
+                </div>
+                <hr class="mt-0 mb-4" />
+                <div class="row pt-1 mx-0 my-0">
+                  <div class="col-6 mb-3">
+                    <h4 class="infoUser">{{ username }}</h4>
+                    <p class="text-muted">Username</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h4 class="infoUser">{{ firstLastName }}</h4>
+                    <p class="text-muted">Name</p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-4" />
+                <div class="row pt-1 mx-0 my-0">
+                  <div class="col-6 mb-3">
+                    <h4 class="infoUser">{{ email }}</h4>
+                    <p class="text-muted">E-mail</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h4 class="infoUser">{{ address }}</h4>
+                    <p class="text-muted">Address</p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-4" />
+                <div class="row pt-1 mx-0 my-0">
+                  <div class="col-6 mb-3">
+                    <h4 class="infoUser">{{ city }}</h4>
+                    <p class="text-muted">City</p>
+                  </div>
+                  <div class="col-6 mb-3">
+                    <h4 class="infoUser">{{ neighborhood }}</h4>
+                    <p class="text-muted">Neighborhood</p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+                <div class="d-flex justify-content-start mx-0 my-0 ps-2 pb-2">
+                  <button
+                    class="btn btn-primary"
+                    data-bs-toggle="modal"
+                    data-bs-target="#changePasswordUserInfo"
+                    (click)="changePass()"
+                  >
+                    <i class="fa fa-lock fa-lg"></i
+                    ><span
+                      class="align-items-center"
+                      style="white-space: nowrap"
+                      >&nbsp;Change Password</span
+                    >
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div
+              class="col-md-4 gradient-custom d-flex flex-column justify-content-center align-items-center h-md-100 order-1 order-md-2 pb-4 pt-4 px-md-0 py-md-0 my-0 mx-0"
+            >
+              <img
+                [src]="image"
+                alt="Avatar"
+                class="img-fluid rounded-circle"
+                id="userInfoProfilePhoto"
+                style="width: 50%;"
+              />
+              <div class="mt-0">
+                <a id="changeImageLink" data-bs-toggle="modal"
+                  data-bs-target="#changeImageUserInfo" class="infoUser"
+                  (click)="resetImageChange()"
+                  >
+                  Change Photo
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- </section> -->
+  <app-add-device></app-add-device>
+
+  <!-- Modal -->
+  <div
+    class="modal fade"
+    id="changePasswordUserInfo"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="changePasswordUserInfoLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-white" style="background-color: #466471">
+          <h5 class="modal-title" id="changePasswordUserInfoLabel">{{ modalTitle }}</h5>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+            (click)="close()"
+          ></button>
+        </div>
+        <div class="modal-body">
+          <app-change-password
+            #changePassword
+          ></app-change-password>
+        </div>
+        <div class="modal-footer">
+          <button
+            type="button"
+            class="btn btn-secondary"
+            data-bs-dismiss="modal"
+            (click)="close()"
+          >
+            Close
+          </button>
+          <button type="button" class="btn btn-primary" (click)="confirm()">
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div
+    class="modal fade"
+    id="changeImageUserInfo"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="changeImageUserInfoLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header text-white" style="background-color: #466471">
+          <h6 class="modal-title" id="changeImageUserInfoLabel">Change Photo</h6>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal"
+            aria-label="Close"
+          ></button>
+        </div>
+        <div class="modal-body justify-content-center align-items-center py-3">
+          <div class="col-12 px-0 mb-4" style="display: flex; justify-content: center; align-items: center;">
+            <img
+              [src]="changeImage"
+              alt="Avatar"
+              class="img-fluid rounded-circle"
+              id="showChangeImage"
+              accept="image/*"
+              style="width: 70%;"
+            />
+          </div>
+          <div class="col-12 mb-2" style="display: flex; justify-content: center; align-items: center;">
+            <input type="file" style="display: none;" #fileInput (change)="onFileSelected($event)">
+            <button class="btn btn-primary" (click)="fileInput.click(); openCrop()" style="margin-right: 2%;" 
+            data-bs-dismiss="modal">Choose Image</button>
+            <button class="btn btn-primary" [hidden]="true" id="openCropImageBtn" data-bs-toggle="modal" data-bs-target="#cropNewImageUserInfo">Open Crop</button>
+            <button class="btn btn-primary" id="deleteImageUserInfo" (click)="deleteImage()" data-bs-dismiss="modal">Delete Image</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="modal fade"
+    id="cropNewImageUserInfo"
+    data-bs-keyboard="false"
+    tabindex="-1"
+    aria-labelledby="cropNewImageUserInfoLabel"
+    aria-hidden="true"
+  >
+    <div class="modal-dialog modal-dialog-centered" id="changeCropProfileImageUserInfoModal">
+      <div class="modal-content">
+        <div class="modal-header text-white" style="background-color: #466471">
+          <h6 class="modal-title" id="cropNewImageUserInfoLabel">New Photo</h6>
+          <button
+            type="button"
+            class="btn-close"
+            data-bs-dismiss="modal" data-bs-target="#cropNewImageUserInfo"
+            aria-label="Close"
+            (click)="closeImageChange()"
+            id="closeCropping"
+            [disabled]="updating"
+          ></button>
+        </div>
+        <div class="modal-body justify-content-center align-items-center">
+          <div class="col-12 px-0 mb-4" style="display: flex; justify-content: center; align-items: center;">
+            
+            <image-cropper
+              [imageChangedEvent]="imgChangeEvt" 
+              [maintainAspectRatio]="true" 
+              [aspectRatio]="1 / 1"
+              format="png"
+              [imageAltText] = "'Crop Image'"
+              [cropperMinWidth] = "100"
+              [cropperMinHeight] = "100"
+              [roundCropper] = "true"
+              [hideResizeSquares] = "false"
+              (imageCropped) = "cropImg($event)"
+              id="showChangeImage"
+            >
+            </image-cropper>
+          </div>
+          <div class="col-12 mb-3 text-center" *ngIf="success">
+            <h6 class="text-success mt-0 mb-2"><b>Updating profile...</b><br></h6>
+          </div>
+          <div class="col-12 mb-2" style="display: flex; justify-content: center; align-items: center;">
+            <input type="file" style="display: none;" #fileInputNew (change)="onFileSelected($event)">
+            <button class="btn btn-primary" (click)="fileInputNew.click()" [disabled]="updating" style="background-color: #54859b;">Choose A Different Photo</button>
+            <button class="btn btn-primary" [hidden]="true" id="closeCropImadePhotoUpdated" data-bs-dismiss="modal" data-bs-target="#cropNewImageUserInfo">Close</button>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="confirmImageChangeUserInfo" class="btn btn-primary" (click)="confirmImage()" [disabled]="selectedImageFile==null">
+            Confirm
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,144 @@
+<div *ngIf="isProducersChecked === true" style="height: 100%">
+  <div
+    class="card-header pb-0 pt-3 bg-transparent row"
+    isConsumersChecked="true;"
+    isProducersChecked="false;"
+    style="margin-left: 0; margin-right: 0; margin-bottom: 2px"
+  >
+    <div class="col-md-5 pb-2">
+      <h6 class="text-capitalize">Current Top 5 Producers</h6>
+    </div>
+    <div
+      class="col-md-7"
+      style="display: flex; justify-content: right; margin: auto; padding: 1px"
+    >
+      <div class="form-check mx-3">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption"
+          id="consumersOption"
+          (change)="onRadioButtonChange($event, 'consumers')"
+          [checked]="isConsumersChecked"
+        />
+        <label class="form-check-label" for="consumersOption">
+          Consumption
+        </label>
+      </div>
+
+      <div class="form-check mx-3">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption"
+          id="producersOption"
+          (change)="onRadioButtonChange($event, 'producers')"
+          [checked]="isProducersChecked"
+        />
+        <label class="form-check-label" for="producersOption">
+          Production
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    class="table-responsive d-flex align-items-center justify-content-center"
+    style="width: 95%; margin: 0 auto; height: calc(100% - 52.2px)"
+  >
+    <table class="table align-items-center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Consumption [kW]</th>
+          <th>Production [kW]</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of producers">
+          <td>{{ item.FirstName }} {{ item.LastName }}</td>
+          <td>{{ item.Address }}</td>
+          <td class="text-center">{{ item.Consumption.toFixed(2) }}</td>
+          <td class="text-center">{{ item.Production.toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p
+      class="position-absolute bottom-0 mb-0 text-center"
+      style="font-size: 14px; text-align: center; left: 0; right: 0"
+    >
+      <i>Measured at {{ currentHour }}h</i>
+    </p>
+  </div>
+</div>
+<div *ngIf="isConsumersChecked === true" style="height: 100%">
+  <div
+    class="card-header pb-0 pt-3 bg-transparent row"
+    style="margin-left: 0; margin-right: 0"
+  >
+    <div class="col-md-5 pb-2">
+      <h6 class="text-capitalize">Current Top 5 Consumers</h6>
+    </div>
+    <div
+      class="col-md-7"
+      style="display: flex; justify-content: right; margin: auto; padding: 1px"
+    >
+      <div class="form-check mx-3">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption"
+          id="consumersOption"
+          (change)="onRadioButtonChange($event, 'consumers')"
+          [checked]="isConsumersChecked"
+        />
+        <label class="form-check-label" for="consumersOption">
+          Consumption
+        </label>
+      </div>
+
+      <div class="form-check mx-3">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption"
+          id="producersOption"
+          (change)="onRadioButtonChange($event, 'producers')"
+          [checked]="isProducersChecked"
+        />
+        <label class="form-check-label" for="producersOption">
+          Production
+        </label>
+      </div>
+    </div>
+  </div>
+  <div
+    class="table-responsive d-flex align-items-center justify-content-center"
+    style="width: 95%; margin: 0 auto; height: calc(100% - 52.2px)"
+  >
+    <table class="table align-items-center">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Address</th>
+          <th>Consumption [kW]</th>
+          <th>Production [kW]</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of consumers">
+          <td>{{ item.FirstName }} {{ item.LastName }}</td>
+          <td>{{ item.Address }}</td>
+          <td class="text-center">{{ item.Consumption.toFixed(2) }}</td>
+          <td class="text-center">{{ item.Production.toFixed(2) }}</td>
+        </tr>
+      </tbody>
+    </table>
+    <p
+      class="position-absolute bottom-0 mb-0 text-center"
+      style="font-size: 14px; text-align: center; left: 0; right: 0"
+    >
+      <i>Measured at {{ currentHour }}h</i>
+    </p>
+  </div>
+</div>

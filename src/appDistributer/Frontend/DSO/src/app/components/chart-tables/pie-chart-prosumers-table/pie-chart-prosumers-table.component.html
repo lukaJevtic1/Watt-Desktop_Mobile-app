@@ -1,0 +1,17 @@
+<table class="table table-striped">
+  <thead
+    class="pt-2"
+    style="background-color: white; position: sticky; top: -1px"
+  >
+    <tr class="text-center">
+      <th scope="col">City</th>
+      <th scope="col text-center">Value [kW]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of currentData; index as i">
+      <th scope="row" class="text-center">{{ item.name }}</th>
+      <td class="text-center">{{ item?.value?.toFixed(2) }}</td>
+    </tr>
+  </tbody>
+</table>

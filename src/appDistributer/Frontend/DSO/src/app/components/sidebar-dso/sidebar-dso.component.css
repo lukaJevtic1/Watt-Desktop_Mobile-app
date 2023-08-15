@@ -1,0 +1,48 @@
+.sidebar h3 {
+  margin-top: 200px;
+}
+#dugme {
+  background-color: #5875a1;
+  color: white;
+  margin-left: 0px;
+}
+.opcije {
+  background-color: #7792ba;
+  height: 63%;
+  border-radius: 3%;
+}
+.div1 {
+  background-color: #7a99b6;
+
+  height: 200%;
+  margin: 10px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 10px;
+}
+.dugme {
+  width: 100%;
+  background-color: #7a99b6;
+  color: white;
+  border: 1px solid #5875a1;
+  height: 45px;
+  margin-top: 5px;
+  box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+  font-size: 18px;
+  font-family: roboto;
+  border-radius: 5px;
+}
+
+#prvodugme {
+  margin-top: 20px;
+}
+.informacije {
+  text-align: center;
+}
+
+#side {
+  width: 280px;
+  height: calc(100vh);
+  background-color: #5875a1 !important;
+  overflow-y: scroll;
+}

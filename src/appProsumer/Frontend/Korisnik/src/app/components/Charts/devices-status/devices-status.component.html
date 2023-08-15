@@ -1,0 +1,61 @@
+
+<div class="card-body pe-md-1">
+    <div class="container-fluid pb-2" style="display: flex; flex-direction: column; align-items: center; justify-content: center;" id="devicesStatusBody">
+        <div class="row px-0 py-0 mx-0 my-0 mb-2 trenutneInformacije">
+            <div class="col-6 px-0">
+                <div class="row px-0 py-0 mx-0 my-0 w-100 text-center devicesConsumption">
+                    <h5 class="mb-0"><b>{{currentConsumption.toFixed(2)}} kWh</b></h5>
+                    <p class="mt-0"><b>Consumption</b></p>
+                </div>
+            </div>
+            <div class="col-6 px-0">
+                <div class="row px-0 py-0 mx-0 my-0 w-100 text-center devicesProduction">
+                    <h5 class="mb-0"><b>{{currentProduction.toFixed(2)}} kWh</b></h5>
+                    <p class="mt-0"><b>Production</b></p>
+                </div>
+            </div>
+            <!-- <div class="col-4 px-0">
+                <div class="row px-0 py-0 mx-0 my-0 w-100 text-center text-success">
+                    <h5 class="mb-0">0kW</h5>
+                    <p class="mt-0">Storage</p>
+                </div>
+            </div> -->
+        </div>
+        <div class="container-fluid px-0 py-0 mx-0 my-0" style="display: flex; flex-direction: column; align-items: center; justify-content: center; overflow: hidden;">
+            <div class="w-100" style="overflow-y: auto; overflow-x: hidden;">
+                <div *ngFor="let device of devices">
+                    <div *ngIf="device.Activity!==0" class="pe-md-2">
+                        <!-- consumption and production -->
+                        <h4 class="small font-weight-bold mb-0" *ngIf="device.CategoryId!=3">{{device.Name}} <span
+                            class="float-right">{{device.CurrentUsage.toFixed(2)}} kWh</span></h4>
+
+                        <!-- storage -->
+                        <h4 class="small font-weight-bold mb-0" *ngIf="device.CategoryId==3">{{device.Name}} <span
+                            class="float-right">{{device.CurrentUsage.toFixed(2)}}/{{device.Wattage.toFixed(2)}} kWh</span></h4>
+
+                        <div class="progress mb-4"
+                        [ngStyle]="{'border': device.CategoryId == 1 ? '1px solid #c14b48' : 
+                                            device.CategoryId == 2 ? '1px solid #48bec1' : 
+                                            device.Activity==1 ? '1px solid #f3734d' : '1px solid #4ab64a'}"
+                        >
+                            <!-- consumption and production -->
+                            <div class="progress-bar" role="progressbar" *ngIf="device.CategoryId!=3"
+                            [ngStyle]="{'width':getProcentage(device, device.CategoryId)+'%','background-color': device.CategoryId=='1'? '#c14b48' : '#48bec1'}"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+
+                            <!-- storage -->
+                            <div class="progress-bar" role="progressbar" *ngIf="device.CategoryId==3"
+                            [ngStyle]="{'width':getBatteryPercentage(device)+'%','background-color': device.Activity==1? '#f3734d' : '#4ab64a'}"
+                            aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="w-100 text-center" *ngIf="devices.length!=0">
+                <i class="fa fa-circle batteryInUse">&nbsp;Battery In Use</i
+                >&nbsp;&nbsp;&nbsp;
+                <i class="fa fa-circle batteryCharging">&nbsp;Battery Charging</i>
+            </div>
+        </div>
+    </div>
+</div>

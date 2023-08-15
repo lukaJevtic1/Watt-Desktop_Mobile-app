@@ -1,0 +1,144 @@
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light"
+  style="padding: 0; height: 101px"
+>
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <img src="assets/images/logo.png" height="75" alt="" />
+    </a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto d-flex align-items-center">
+        <li class="nav-item" routerLink="home">
+          <button
+            id="home"
+            class="nav-link btn active"
+            aria-current="page"
+            type="button"
+          >
+            Home
+          </button>
+        </li>
+        <li class="nav-item dropdown" *ngIf="letValue == 'Admin'">
+          <button
+            class="nav-link btn dropdown"
+            type="button"
+            id="navbarDropdownUsers"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+            data-bs-target="#navbarDropdownUsers"
+          >
+            Users
+          </button>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdownUsers"
+          >
+            <li>
+              <a class="dropdown-item" routerLink="users">All Users</a>
+            </li>
+            <li>
+              <a
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal3"
+                >Add New User</a
+              >
+            </li>
+          </ul>
+        </li>
+
+        <li class="nav-item mr-2" *ngIf="letValue !== 'Admin'">
+          <button
+            id="navbarDropdownUsers"
+            class="nav-link btn"
+            type="button"
+            routerLink="users"
+          >
+            Users
+          </button>
+        </li>
+
+        <div *ngIf="letValue === 'Admin'">
+          <li class="nav-item dropdown">
+            <button
+              class="nav-link btn dropdown"
+              type="button"
+              id="navbarDropdownEmployees"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
+              Employees
+            </button>
+            <ul
+              class="dropdown-menu dropdown-menu-end"
+              aria-labelledby="navbarDropdownEmployees"
+            >
+              <li>
+                <a class="dropdown-item" routerLink="employees"
+                  >All Employees</a
+                >
+              </li>
+              <li>
+                <a
+                  class="dropdown-item"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal2"
+                  >Add New Employee</a
+                >
+              </li>
+            </ul>
+          </li>
+        </div>
+        <li class="nav-item dropdown">
+          <a
+            class="nav-link dropdown"
+            href="#"
+            id="navbarDropdown"
+            role="button"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <div class="d-flex align-items-center">
+              <img
+                [src]="currentImage"
+                alt="User Profile Picture"
+                class="rounded-circle"
+                width="40"
+                height="40"
+              />
+            </div>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-end"
+            aria-labelledby="navbarDropdown"
+          >
+            <li>
+              <a
+                class="dropdown-item"
+                data-bs-toggle="modal"
+                data-bs-target="#exampleModal4"
+                >See Profile</a
+              >
+            </li>
+            <li>
+              <a class="dropdown-item" routerLink="../login" (click)="LogOut()"
+                >Log Out</a
+              >
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

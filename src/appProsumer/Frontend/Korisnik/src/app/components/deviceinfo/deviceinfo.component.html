@@ -1,0 +1,373 @@
+<section class="mx-0 my-0 px-0 py-0" style="background-color: #f4f5f7">
+  <div class="container-fluid h-100 px-0 py-0 mx-0 my-0">
+    <div
+      class="row d-flex justify-content-center align-items-start align-items-md-center mx-0 my-0 px-0 py-0 h-100"
+    >
+      <div class="col px-0 mx-0 my-0 py-0 h-100">
+        <div class="card h-md-100" style="border-radius: 0">
+          <div
+            class="row g-0 h-md-100 justify-content-center align-items-start px-0 py-0"
+          >
+            <div
+              class="col-md-6 justify-content-center align-items-center h-md-100 order-1 order-md-1 mx-0 my-0 px-0 py-0"
+            >
+              <div
+                class="card-body"
+                style="width: 80%; margin: 0 auto; margin-bottom: 0%"
+                id="consumptionLimitCardBody"
+                [ngStyle]="{
+                  'margin-top': widthService.deviceWidth > 576 ? '10%' : '0%'
+                }"
+              >
+                <div
+                  class="w-80 px-0 py-0 mx-0 my-0"
+                  style="
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                  "
+                  id="consumptionLimitBody"
+                >
+                  <ngx-gauge
+                    class="text-size"
+                    [type]="'semi'"
+                    [size]="width"
+                    [label]="gaugeLabel"
+                    [append]="gaugeAppendText"
+                    [min]="0"
+                    [max]="maxUsageNumber"
+                    [markers]="markers"
+                    [value]="currentUsage"
+                    [valueFormatting]="formatValue"
+                    [cap]="'butt'"
+                    [thick]="45"
+                    [thresholds]="thresholds"
+                    *ngIf="cat == 1 || cat == 2"
+                  >
+                  </ngx-gauge>
+                  <div
+                    class="w-100"
+                    id="batteryCont"
+                    *ngIf="cat == 3"
+                    [ngStyle]="{
+                      height: widthService.deviceWidth > 576 ? '98%' : '70%'
+                    }"
+                  >
+                    <div class="battery-body p-1">
+                      <h1
+                        [ngStyle]="{
+                          left: widthService.deviceWidth > 576 ? '2%' : '5%'
+                        }"
+                      >
+                        <i
+                          class="fa fa-bolt"
+                          style="color: #08376b"
+                          *ngIf="state == 2 && percentFull<100"
+                        ></i>
+                        <i
+                          class="fa fa-exclamation-triangle"
+                          style="color: #08376b"
+                          *ngIf="state == 1 && percentFull <= 15"
+                          data-bs-toggle="modal"
+                          data-bs-target="#batteryPercentageWarning"
+                        >
+                        </i>
+                        {{ percentFull }}%
+                      </h1>
+                      <div
+                        class="battery-level"
+                        id="bateryPercentage"
+                        [ngStyle]="{
+                          width: percentFull + '%',
+                          'background-color':
+                            state == 0
+                              ? '#8ca6a6'
+                              : state == 1
+                              ? '#f3734d'
+                              : '#54d454'
+                        }"
+                      ></div>
+                    </div>
+                    <div class="battery-top ms-0"></div>
+                  </div>
+                </div>
+                <!-- if device is consumer -->
+                <div class="legend w-100 text-center" *ngIf="cat == 1">
+                  <i class="fa fa-circle greenZone"
+                    >&nbsp;0-{{ AvgUsage }} kWh</i
+                  >&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-circle blueZone"
+                    >&nbsp; {{ AvgUsage }}-{{ MaxUsage }} kWh</i
+                  >&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-circle redZone">&nbsp;{{ MaxUsage }}+ kWh</i>
+                </div>
+                <!-- if device is producer -->
+                <div class="legend w-100 text-center" *ngIf="cat == 2">
+                  <i class="fa fa-circle redZone">&nbsp;0-{{ AvgUsage }} kWh</i
+                  >&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-circle blueZone"
+                    >&nbsp; {{ AvgUsage }}-{{ MaxUsage }} kWh</i
+                  >&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-circle greenZone">&nbsp;{{ MaxUsage }} kWh</i>
+                </div>
+                <!-- if device is storage -->
+                <div class="legend w-100 text-center" *ngIf="cat == 3">
+                  <h5 style="color: #08376b">
+                    Current Status: {{ currentCapacity }} kWh
+                  </h5>
+                  <h6 style="color: #08376b; margin-top: 0">
+                    Max Capacity: {{ maxCapacity }} kWh
+                  </h6>
+                  <i class="fa fa-circle batteryOff">&nbsp;Turned Off</i
+                  >&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-circle batteryCharging">&nbsp;Charging</i
+                  >&nbsp;&nbsp;&nbsp;
+                  <i class="fa fa-circle batteryInUse">&nbsp;In Use</i
+                  >&nbsp;&nbsp;&nbsp;
+                </div>
+              </div>
+
+              <div class="card-body p-1 p-md-4" style="border: 0">
+                <div
+                  style="display: flex; justify-content: space-between"
+                  class="px-2"
+                >
+                  <h6 class="section">Device Information</h6>
+                  <div *ngIf="activity == 0" (click)="toggle()">
+                    <i class="fa fa-power-off fa-lg off faBtnSmall px-2 py-2 mb-2"></i>&nbsp;Turn On
+                  </div>
+                  <div *ngIf="activity != 0" (click)="toggle()">
+                    <i class="fa fa-power-off fa-lg on faBtnSmall px-2 py-2 mb-2"></i>&nbsp;Turn Off
+                  </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+                <div class="row pt-1 mx-0 my-0">
+                  <div class="col-6 mb-1">
+                    <h5 style="color: #08376b">{{ IpAddress }}</h5>
+                    <p class="text-muted">IP Address</p>
+                  </div>
+                  <div class="col-6 mb-1">
+                    <h5 style="color: #08376b">{{ TypeName }}</h5>
+                    <p class="text-muted">Device Type</p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+                <div class="row pt-1 mx-0 my-0">
+                  <div class="col-6 mb-1">
+                    <h5 style="color: #08376b">{{ ModelName }}</h5>
+                    <p class="text-muted">Device Model</p>
+                  </div>
+                  <div class="col-6 mb-1">
+                    <h5 style="color: #08376b">{{ Name }}</h5>
+                    <p class="text-muted">Device Name</p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+
+                <div class="row pt-1 mx-0 my-0">
+                  <div class="col-6 mb-1">
+                    <h5 style="color: #08376b">{{ MaxUsage }} kWh</h5>
+                    <p class="text-muted">
+                      Maximum hourly {{ catName.toLowerCase() }}
+                    </p>
+                  </div>
+                  <div class="col-6 mb-1">
+                    <h5 style="color: #08376b">{{ AvgUsage }} kWh</h5>
+                    <p class="text-muted">
+                      Average hourly {{ catName.toLowerCase() }}
+                    </p>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+
+                <div class="row pt-1 mx-0 my-0 mb-2">
+                  <div class="col-6 mb-1">
+                    <h6 style="color: green" *ngIf="DsoView">
+                      <i class="fa fa-check-square"></i> DSO Can View
+                    </h6>
+                    <h6 style="color: #c14b48" *ngIf="!DsoView">
+                      <i class="fa fa-minus-square"></i> DSO Can't View
+                    </h6>
+                  </div>
+                  <div class="col-6 mb-1">
+                    <h6 style="color: green" *ngIf="DsoControl">
+                      <i class="fa fa-check-square"></i> DSO Can Control
+                    </h6>
+                    <h6 style="color: #c14b48" *ngIf="!DsoControl">
+                      <i class="fa fa-minus-square"></i> DSO Can't Control
+                    </h6>
+                  </div>
+                </div>
+                <hr class="mt-0 mb-3" />
+                <div></div>
+                <div
+                  class="d-flex justify-content-start"
+                  style="margin-top: 5%; margin-bottom: 3%; padding-left: 3%"
+                >
+                  <button
+                    class="btn btn-primary"
+                    (click)="edit()"
+                    data-bs-toggle="modal"
+                    data-bs-target="#staticBackdrop2"
+                  >
+                    <i class="fa fa-edit fa-lg"></i>&nbsp;Edit
+                  </button>
+                  &nbsp;&nbsp;
+                  <button class="btn btn-primary" (click)="delete(idDev)">
+                    <i class="fa fa-trash fa-lg"></i>&nbsp;Delete</button
+                  >&nbsp;&nbsp;
+                </div>
+              </div>
+            </div>
+
+            <!-- grafici sa strane -->
+            <div
+              class="col-md-6 gradient-custom d-flex flex-column h-md-100 order-2 order-md-2"
+            >
+              <!-- *ngIf="cat==1 || cat==2" -->
+              <div class="col-md-12 mb-3">
+                <div class="card shadow w-100" id="cardone">
+                  <app-realizationDevice
+                    #realizationDevice
+                    [type]="catName"
+                    class="w-100"
+                  ></app-realizationDevice>
+                </div>
+              </div>
+              <div class="col-md-12 mb-2 mb-md-1">
+                <div class="card shadow w-100" id="cardtwo">
+                  <app-predictionDevice
+                    #predictionDevice
+                    [type]="catName"
+                    class="w-100"
+                  ></app-predictionDevice>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-add-device></app-add-device>
+<div
+  class="modal fade"
+  id="staticBackdrop2"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="staticBackdrop2Label"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #466471">
+        <h5 class="modal-title" id="staticBackdrop2Label">Edit Information</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <app-edit-device-form
+          [deviceData]="deviceData"
+          #editData
+          (editedBoolean)="editedDevice($event)"
+        ></app-edit-device-form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button type="button" class="btn btn-primary" (click)="confirm()">
+          Confirm
+        </button>
+        <button [hidden]="true" id="closeEditDeviceInfo" data-bs-dismiss="modal" data-bs-target="#staticBackdrop2">Close Edit</button>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade"
+  id="batteryPercentageWarning"
+  tabindex="-1"
+  aria-labelledby="batteryPercentageWarningLabel"
+  aria-hidden="true"
+  data-bs-keyboard="false"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white bg-danger">
+        <h3 class="modal-title" id="batteryPercentageWarningLabel">Battery Is Running Out!</h3>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body text-center">
+        <h5 class="text-danger">Your battery has 15% or less power left</h5>
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="turnBatteryOnDeviceInfo"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="turnBatteryOnDeviceInfoLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #466471">
+        <h4 class="modal-title ps-2" id="turnBatteryOnDeviceInfoLabel">
+          Turn On {{Name}}
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          style="background-color: white"
+        ></button>
+      </div>
+      <div class="modal-body row d-flex justify-content-center align-items-center">
+        <div
+          class="col-6 col-lg-6"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+        <!-- use battery -->
+          <div
+            (click)="toggleStorage(1)"
+            class="text-center p-3"
+          >
+            <i class="fa fa-power-off inUse faBtn px-2 mb-2 shadow"></i>
+            <p style="color: green">Use The Battery</p>
+          </div>
+        </div>
+        <div
+          class="col-6 col-lg-6 text-center text-lg-start"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <button id="closeModalBatteryBtnDeviceInfo" [hidden]="true" data-bs-dismiss="modal" data-bs-target="#turnBatteryOnDeviceInfo">Close Modal</button>
+          <button id="openModalBatteryBtnDeviceInfo" [hidden]="true" data-bs-toggle="modal" data-bs-target="#turnBatteryOnDeviceInfo">Open Modal</button>
+          
+          <!-- charge battery -->
+          <div class="text-center p-3" (click)="toggleStorage(2)">
+            <i class="fa fa-plug charge faBtn px-2 mb-2 shadow"></i>
+            <p style="color: #08376b;">Charge The Battery</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

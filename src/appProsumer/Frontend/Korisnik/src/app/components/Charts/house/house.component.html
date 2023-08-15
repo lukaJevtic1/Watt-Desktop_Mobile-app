@@ -1,0 +1,522 @@
+<div class="card-body pt-0 pb-4">
+  <div
+    class="row pt-0 mb-2"
+    id="houseCont"
+    style="display: flex; justify-content: center"
+  >
+    <div
+      class="roof mt-0"
+      style="width: 100%; height: 35%; margin-top: 0%"
+    ></div>
+    <div
+      class="walls px-1 py-2"
+      style="width: 85%; height: 65%; overflow-x: hidden; overflow-y: auto;"
+      id="houseWalls"
+    >
+    <h1
+      *ngIf="devices.length == 0"
+      style="
+        text-align: center;
+        margin-top: 15%;
+        opacity: 60%;
+        font-style: italic;
+        font-weight: normal;
+        z-index: 100;
+      "
+    >
+      There Are No Devices
+    </h1>
+    <!-- device cards start -->
+      <div class="row w-100 row-cols-3 row-cols-md-4 g-1 ps-1">
+        <div class="col" *ngFor="let device of devices; index as i" [ngSwitch]="device.TypeId">
+          
+          <div class="card h-100"
+            *ngSwitchCase="'1'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/fridge.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name mt-0">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'2'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/tv.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'3'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/oven.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'4'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/air-conditioner.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'5'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/microwave.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'6'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/dish-washer.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'7'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/coffee-machine.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'8'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/pc.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'9'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/washing-machine.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'10'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/dryer-machine.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'11'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/vacuum-cleaner.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'12'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/iron.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'13'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/dryer.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'14'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/water-heater.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'15'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/kettle.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'16'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/station-charging.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'17'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/playstation.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'18'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/smart-heater.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'19'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/solar-panel.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'20'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/windmill.png" class="card-img-top mt-1 mb-0" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+
+          <div class="card h-100"
+            *ngSwitchCase="'21'"
+            [ngStyle]="{
+              'background-color': device.Activity==0 ? '#D8D8D8' : '#8ee5c9'
+            }"
+            (click)="selectedDevice(i)"
+            data-bs-toggle="modal"
+            data-bs-target="#turnDeviceOffOn"
+            style="cursor: pointer;">
+            <img src="assets/images/battery.png" class="card-img-top mt-2 mb-2" style="width: 30%;">
+            <div class="card-body p-0 m-0"></div>
+            <div class="card-footer w-100 pb-0">
+              <div class="device-name">{{ device.Name }}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- device cards end -->
+    </div>
+  </div>
+  <div class="legend w-100 text-center mt-1" *ngIf="devices.length != 0" id="devicesHouseLegend">
+    <i class="fa fa-circle activeDevice">&nbsp;Device is active</i
+    >&nbsp;&nbsp;&nbsp;
+    <i class="fa fa-circle inactiveDevice">&nbsp;Device is inactive</i>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="turnDeviceOffOn"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="turnDeviceOffOnLabel"
+  aria-hidden="true"
+> <!-- data-bs-backdrop="static" -->
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #466471">
+        <h4 class="modal-title ps-2" id="turnDeviceOffOnLabel">
+          {{name}}
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          style="background-color: white"
+          (click)="reset()"
+          id="closeturnDeviceOffOn"
+        ></button>
+      </div>
+      <div class="modal-body row d-flex justify-content-center align-items-center">
+        <div
+          class="col-6 col-lg-6"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <div
+            *ngIf="device?.Activity == 0"
+            (click)="turnDeviceoffOn()"
+            class="text-center p-3"
+          >
+            <i class="fa fa-power-off off faBtn px-2 shadow mb-2"></i>
+            <p><b>Turn On?</b></p>
+          </div>
+          <div
+            *ngIf="device?.Activity != 0"
+            (click)="turnDeviceoffOn()"
+            class="text-center p-3"
+          >
+            <i class="fa fa-power-off on faBtn px-2 shadow mb-2"></i>
+            <p><b>Turn Off?</b></p>
+          </div>
+          <!-- <div
+            *ngIf="device?.Activity == 1 && device?.CategoryId==3"
+            (click)="turnDeviceoffOn()"
+            class="text-center p-3"
+          >
+            <i class="fa fa-power-off on faBtn px-2 shadow mb-2"></i>
+            <p style="color: green"><b>In Use</b></p>
+          </div> -->
+          <!-- <div
+            *ngIf="device?.Activity == 2 && device?.CategoryId==3"
+            (click)="turnDeviceoffOn()"
+            class="text-center p-3"
+          >
+            <i class="fa fa-power-off on faBtn px-2 shadow mb-2"></i>
+            <p style="color: green"><b>Charging</b></p>
+          </div> -->
+        </div>
+        <div
+          class="col-6 col-lg-6 text-center text-lg-start"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <button id="closeModalBtn" [hidden]="true" data-bs-dismiss="modal" data-bs-target="#turnDeviceOffOn">Close Modal</button>
+          <button id="openModalBtn" [hidden]="true" data-bs-toggle="modal" data-bs-target="#turnDeviceOffOn">Open Modal</button>
+
+          <div class="text-center p-3" (click)="navigateToPage()">
+            <i class="fa fa-folder-open visit faBtn px-2 shadow mb-2" style="color: #08376b;"></i>
+            <p><b>Device Page</b></p>
+          </div>
+        </div>
+        <!-- <div class="col-12 ps-2">
+          <small class="text-success" *ngIf="show"
+            >Device turned {{ lastState }}!</small
+          >
+          <small class="text-success" *ngIf="showBattery"
+            >{{batteryNofit}}</small
+          >
+          <small class="text-error" *ngIf="showBatteryError"
+            >Error occurred! Try again later.</small
+          >
+        </div> -->
+      </div>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="turnBatteryOn"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="turnBatteryOnLabel"
+  aria-hidden="true"
+> <!-- data-bs-backdrop="static" -->
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #466471">
+        <h4 class="modal-title ps-2" id="turnBatteryOnLabel">
+          <!-- Turn this device {{ offOn }}? -->
+          Turn On {{name}}
+        </h4>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          style="background-color: white"
+          (click)="reset()"
+        ></button>
+      </div>
+      <div class="modal-body row d-flex justify-content-center align-items-center">
+        <div
+          class="col-6 col-lg-6"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+        <!-- use battery -->
+          <div
+            (click)="toggleStorage(1)"
+            class="text-center p-3"
+          >
+            <i class="fa fa-power-off on faBtn px-2 shadow mb-2"></i>
+            <p style="color: green"><b>Use The Battery</b></p>
+          </div>
+        </div>
+        <div
+          class="col-6 col-lg-6 text-center text-lg-start"
+          style="display: flex; justify-content: center; align-items: center"
+        >
+          <button id="closeModalBatteryBtn" [hidden]="true" data-bs-dismiss="modal" data-bs-target="#turnBatteryOn">Close Modal</button>
+          <button id="openModalBatteryBtn" [hidden]="true" data-bs-toggle="modal" data-bs-target="#turnBatteryOn">Open Modal</button>
+          <!-- charge battery -->
+          <div class="text-center p-3" (click)="toggleStorage(2)">
+            <i class="fa fa-plug charge faBtn px-2 shadow mb-2"></i>
+            <p style="color: #08376b;"><b>Charge The Battery</b></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

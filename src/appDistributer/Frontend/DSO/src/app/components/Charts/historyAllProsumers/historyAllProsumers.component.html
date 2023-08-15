@@ -1,0 +1,142 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0)"
+  size="medium"
+  color="black"
+  type="ball-clip-rotate"
+  [showSpinner]="true"
+  [fullScreen]="false"
+  [name]="'spiner2'"
+></ngx-spinner>
+<div style="height: 100%">
+  <div
+    class="card-header pb-0 pt-3 bg-transparent row"
+    style="margin-left: 0; margin-right: 0"
+  >
+    <div
+      class="col-6"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        padding-right: 0;
+      "
+    >
+      <h6 class="m-0 font-weight-bold ps-2" style="margin-bottom: 2px">
+        Realization &nbsp;<button
+          class="btn btn-outline-primary p-0 px-1 m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#historyAllProsumersTable"
+        >
+          <i class="fa fa-table"></i>
+        </button>
+      </h6>
+    </div>
+    <div
+      class="col-6"
+      style="
+        display: flex;
+        justify-content: right;
+        margin: 0px 0px 2px auto;
+        padding: 0;
+      "
+    >
+      <button
+        class="btn btn-primary realizationbtn"
+        id="realiz1"
+        (click)="HistoryWeek('realiz1')"
+        style="margin: 1px"
+        type="button"
+      >
+        7 Days
+      </button>
+      <button
+        class="btn btn-primary realizationbtn"
+        id="realiz2"
+        (click)="HistoryMonth('realiz2')"
+        style="margin: 1px"
+        type="button"
+      >
+        1 Month
+      </button>
+      <button
+        class="btn btn-primary realizationbtn"
+        id="realiz3"
+        (click)="HistoryYear('realiz3')"
+        type="button"
+        style="margin: 1px"
+      >
+        1 Year
+      </button>
+    </div>
+  </div>
+  <div
+    class="card-body"
+    style="padding-top: 5px; padding-bottom: 0px; max-height: 100% !important"
+  >
+    <h1
+      *ngIf="data.length == 0"
+      style="
+        text-align: center;
+        margin-top: 15%;
+        opacity: 20%;
+        font-style: italic;
+        font-weight: normal;
+      "
+    >
+      There is no available Data
+    </h1>
+    <canvas
+      *ngIf="data.length != 0"
+      id="chartCanvasHistoryAll"
+      style="
+        min-height: 100% !important;
+        max-height: 100% !important;
+        width: 100% !important;
+      "
+    ></canvas>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="historyAllProsumersTable"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="historyAllProsumersTableLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #5875a1">
+        <h5 class="modal-title" id="historyAllProsumersTableLabel">
+          Consumption/Production History Table
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body pt-0"
+        style="overflow-y: auto; overflow-x: hidden"
+        id="modalFadeHistoryAllProsumers"
+      >
+        <app-history-all-prosumers-table
+          [data]="data"
+        ></app-history-all-prosumers-table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="exportTable(data)"
+        >
+          Export Table
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

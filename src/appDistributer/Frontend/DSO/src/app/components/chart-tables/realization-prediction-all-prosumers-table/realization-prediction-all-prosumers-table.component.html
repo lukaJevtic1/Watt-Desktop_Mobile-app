@@ -1,0 +1,23 @@
+<table class="table table-striped">
+  <thead
+    style="position: sticky; top: -1px; background-color: white"
+    class="pt-2"
+  >
+    <tr class="text-center">
+      <th scope="col"></th>
+      <th scope="col text-center px-0">Consumption [kWh]</th>
+      <th scope="col text-center px-0">Prediction for Consumption [kWh]</th>
+      <th scope="col text-center px-0">Production [kWh]</th>
+      <th scope="col text-center px-0">Prediction for Production [kWh]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let value of data[1]?.values; let i = index">
+      <th scope="row" class="ps-4">{{ value.x }}</th>
+      <td class="text-center">{{ data[0]?.values[i]?.y?.toFixed(2) }}</td>
+      <td class="text-center">{{ data[1]?.values[i]?.y?.toFixed(2) }}</td>
+      <td class="text-center">{{ data[2]?.values[i]?.y?.toFixed(2) }}</td>
+      <td class="text-center">{{ data[3]?.values[i]?.y?.toFixed(2) }}</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,0 +1,39 @@
+<div id="side" class="d-flex flex-column flex-shrink-0 p-0 text-white">
+  <a
+    class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+  >
+    <i class="fa fa-lg fa-filter me-2"></i>
+    <span class="fs-4">Filters</span>
+  </a>
+  <hr />
+  <div class="sidebar-content">
+    <div class="list-group list-group-flush">
+      <a class="list-group-item list-group-item-action">
+        <p><strong>Region</strong></p>
+        <app-region #region></app-region>
+      </a>
+      <a class="list-group-item list-group-item-action mb-5">
+        <p><strong>Role</strong></p>
+        <app-role #role></app-role>
+      </a>
+      <a class="list-group-item list-group-item-action pb-0">
+        <button
+          class="btn btn-primary"
+          style="width: 100%"
+          (click)="getByFilet()"
+        >
+          Apply Filters
+        </button>
+      </a>
+      <a class="list-group-item list-group-item-action pt-0">
+        <button
+          class="btn btn-secondary mt-3"
+          style="width: 100%"
+          (click)="loadAll()"
+        >
+          Reset Filters
+        </button>
+      </a>
+    </div>
+  </div>
+</div>

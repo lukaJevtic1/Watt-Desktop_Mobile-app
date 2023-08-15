@@ -1,0 +1,322 @@
+<head>
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
+    crossorigin=""
+  ></script>
+</head>
+
+<div class="container-fluid mx-0 my-0 px-0 py-0 h-100" id="sadrzaj">
+  <div class="d-flex flex-column g-0 h-100 px-0 py-0 mx-0 my-0">
+    <div class="d-flex flex-grow-1 g-0 h-100 px-0 py-0 mx-0 my-0">
+      <div
+        class="col-md-2 px-0 py-0 mx-0 my-0"
+        style="background-color: #5875a1"
+      >
+        <div
+          class="row filters d-flex justify-content-center align-items-center h-100 w-100 px-0 py-0 mx-0 my-0"
+          id="side"
+        >
+          <div class="header text-white ps-4 mx-0 my-0" style="height: 5%; display: flex; align-items: center;">
+            <i class="fa fa-lg fa-filter me-1" style="font-size: 1.5rem"></i>
+            <span class="fs-4" style="font-size: 1.3rem">&nbsp;Filters</span>
+          </div>
+          <hr style="background-color: white; color: white;"/>
+          <div
+            class="body text-white text-center"
+            style="
+              height: 75%;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+            "
+          >
+            <!-- cities -->
+            <div class="w-100 text-start">
+              <p class="mb-0" style="padding-left: 10%;"><strong>City</strong></p>
+              <select
+                style="width: 85%; margin: 0 auto"
+                class="form-select mb-3"
+                name="City"
+                (change)="ChangeCity($event)"
+                [(ngModel)]="city"
+              >
+                <option value="-1">All</option>
+                <option
+                  *ngFor="let c of cities"
+                  [value]="c.id"
+                >
+                  {{ c.cityName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- neighborhoods -->
+            <div class="w-100 text-start" style="margin-bottom: 6%">
+              <p class="mb-0" style="padding-left: 10%;"><strong>Neighborhood</strong></p>
+              <select
+                class="dropdown dropdown-toggle"
+                style="width: 85%; margin: 0 auto"
+                name="Neighborhood"
+                (change)="ChangeNeighborhood($event)"
+                class="form-control"
+                [(ngModel)]="neighborhood"
+                [disabled]="disableNeigh"
+              >
+                <option value="all">All</option>
+                <option
+                  *ngFor="let neighborhood of Neighborhoods"
+                  [value]="neighborhood.id"
+                >
+                  {{ neighborhood.neigbName }}
+                </option>
+              </select>
+            </div>
+
+            <!-- power consumption -->
+            <div class="w-100 sliderDivs" style="margin-bottom: 5%">
+              <p class="mb-0 text-start" style="padding-left: 10%;"><strong>Power Consumption</strong></p>
+              <div class="custom-slider" style="width: 80%; margin: 0 auto">
+                <ngx-slider
+                  [(value)]="minValueC"
+                  [(highValue)]="maxValueC"
+                  [options]="optionsC"
+                ></ngx-slider>
+              </div>
+              min<input class="button1" type="text" [(ngModel)]="minValueC" />
+              <input class="button2" type="text" [(ngModel)]="maxValueC" />max
+            </div>
+
+            <!-- power production -->
+            <div class="w-100 sliderDivs" style="margin-bottom: 5%">
+              <p class="mb-0 text-start" style="padding-left: 10%;"><strong>Power Production</strong></p>
+              <div class="custom-slider" style="width: 80%; margin: 0 auto">
+                <ngx-slider
+                  [(value)]="minValueP"
+                  [(highValue)]="maxValueP"
+                  [options]="optionsP"
+                ></ngx-slider>
+              </div>
+              min<input class="button1" type="text" [(ngModel)]="minValueP" />
+              <input class="button2" type="text" [(ngModel)]="maxValueP" />max
+            </div>
+
+            <!-- number of devices -->
+            <div class="w-100 sliderDivs" style="margin-bottom: 2%">
+              <p class="mb-0 text-start" style="padding-left: 10%;"><strong>Number of Devices</strong></p>
+              <div class="custom-slider" style="width: 80%; margin: 0 auto">
+                <ngx-slider
+                  [(value)]="minValue"
+                  [(highValue)]="maxValue"
+                  [options]="options"
+                ></ngx-slider>
+              </div>
+              min<input class="button1" type="text" [(ngModel)]="minValue" />
+              <input class="button2" type="text" [(ngModel)]="maxValue" />max
+            </div>
+          </div>
+          <div
+            class="footer"
+            style="
+              text-align: center;
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+              height: 15%;
+            "
+          >
+            <button
+              class="btn btn-primary"
+              style="margin-bottom: 3%; background-color: rgba(3, 61, 122, 0.7); border-color: rgb(3, 50, 100);"
+              (click)="filter()"
+              [disabled]="disableFiltering"
+            >
+              Apply Filters
+            </button>
+            <button class="btn btn-primary" 
+              (click)="reset()" 
+              [disabled]="disableFiltering"
+              style="background-color: rgba(141, 2, 2, 0.7); border-color: rgba(141, 2, 2); color: white;">
+              Reset Filters
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-10 px-0 py-0 mx-0 my-0" id="mapCont">
+        <app-mininavbar style="z-index: 9999"></app-mininavbar>
+        <!-- <div class="d-flex justify-content-center">
+          <div
+            class="spinner-border"
+            style="margin-top: 25%"
+            role="status"
+            *ngIf="loader"
+          >
+            <span class="sr-only">Loading...</span>
+          </div>
+        </div> -->
+        <div class="d-flex g-0 px-0 py-0 mx-0 my-0 mapLegend w-100">
+          <div
+            class="col-md-9 pe-0 ps-4 py-0 mx-0 my-0 d-flex justify-content-center align-items-center"
+          >
+            <div class="map-container" style="border: 2px solid #5875a1" id="mapWrapper">
+             <div id="map"></div>
+             <div id="search-container" style="background-color: #f8f8fa;border-radius: 10px;height:8%;width:27%;">
+             <input type="text" style="background-color: #f8f8fa; border-radius: 10px;height:100%;width:95%;font-weight:bold;padding-left:2%;" placeholder="Search by name" [(ngModel)]="searchUsername" (keyup)="searchUsers();" />
+             <button type="button" class="btn-close" (click)="close()" style="width:7px;height:7px;margin-left:-10%;transform: translateY(-50%);position: absolute;top: 50%;"></button> </div>&nbsp;
+            <div id="search-container1" style="background-color: #f8f8fa;border-radius: 10px;height:8%;width:27%;">
+              <input type="text" style="background-color: #f8f8fa; border-radius: 10px;height:100%;width:95%;font-weight:bold;padding-left:2%;" placeholder="Search by address" [(ngModel)]="searchAddress" (keyup)="searchUsersbyAddress();" />
+           
+              <button
+              type="button"
+              class="btn-close"
+              (click)="close1()"
+              style="width:7px;height:7px;margin-left:-10%;transform: translateY(-50%);position: absolute;top: 50%;"
+            ></button>
+         
+             </div>
+            </div>
+          </div>
+          <div class="col-md-3 h-100 px-0 py-0 mx-0 my-0">
+            <div
+              class="row d-flex justify-content-center align-items-center h-100 px-0 py-0 mx-0 my-0"
+            >
+              <div
+                class="card mx-0 my-0"
+                style="
+                  width: 85%;
+                  height: 38%;
+                  border-radius: 5%;
+                  background-color: rgb(236, 236, 238);
+                "
+              >
+                <div class="card-body">
+                  <p class="card-subtitle mb-2 mb-xxl-3" style="font-size: 82%">
+                    Current consumption greater than current production
+                  </p>
+                  <p class="mb-1" style="font-size: 14px"><b>Consuming:</b></p>
+                  <p class="card-text" style="font-size: 15px">
+                    <img
+                      src="assets/images/marker-icon-2x-yellow.png"
+                      class="icon"
+                    /><b *ngIf="!consumpLessThan04Checked" (click)="remove04LessCons()" class="legendPin"> less than 0.4 kW</b>
+                      <s *ngIf="consumpLessThan04Checked" (click)="add04LessCons()" class="legendPin"><b> less than 0.4 kW</b></s>
+                  </p>
+                  <p class="card-text" style="font-size: 15px">
+                    <img
+                      src="assets/images/marker-icon-2x-orange.png"
+                      class="icon"
+                    /><b *ngIf="!consumpBetween0408Checked" (click)="removeBetween0408Cons()" class="legendPin"> between 0.4 - 0.8 kW</b>
+                      <s *ngIf="consumpBetween0408Checked" (click)="addBetween0408Cons()" class="legendPin"><b> between 0.4 - 0.8 kW</b></s>
+                  </p>
+                  <p class="card-text" style="font-size: 15px">
+                    <img
+                      src="assets/images/marker-icon-2x-red.png"
+                      class="icon"
+                    /><b *ngIf="!consumpLessThan08Checked" (click)="remove08MoreCons()" class="legendPin"> more than 0.8 kW</b>
+                      <s><b *ngIf="consumpLessThan08Checked" (click)="add08MoreCons()" class="legendPin"> more than 0.8 kW</b></s>
+                  </p>
+                  <p
+                    class="position-absolute bottom-0 start-3"
+                    style="font-size: 13px"
+                  >
+                    <i>Measured at {{ currentHour }}h</i>
+                  </p>
+                </div>
+              </div>
+              <div
+                class="card mx-0 my-0"
+                style="
+                  width: 85%;
+                  height: 38%;
+                  border-radius: 5%;
+                  background-color: rgb(236, 236, 238);
+                "
+              >
+                <div class="card-body">
+                  <p class="card-subtitle mb-2 mb-xxl-3" style="font-size: 82%">
+                    Current production greater than current consumption
+                  </p>
+                  <p class="mb-1" style="font-size: 14px"><b>Producing:</b></p>
+                  <p class="card-text" style="font-size: 15px">
+                    <img
+                      src="assets/images/marker-icon-2x-turquoise.png"
+                      class="icon"
+                    /><b *ngIf="!productLessThan017Checked" (click)="removeLessThan017Prod()" class="legendPin"> less than 0.17 kW</b>
+                      <s *ngIf="productLessThan017Checked" (click)="addLessThan017Prod()" class="legendPin"><b> less than 0.17 kW</b></s>
+                  </p>
+                  <p class="card-text" style="font-size: 15px">
+                    <img
+                      src="assets/images/marker-icon-2x-lime.png"
+                      class="icon"
+                    /><b *ngIf="!productBetween017021Checked" (click)="removeBetween017021Prod()" class="legendPin"> between 0.17 - 0.21 kW</b>
+                      <s *ngIf="productBetween017021Checked" (click)="addBetween017021Prod()" class="legendPin"><b> between 0.17 - 0.21 kW</b></s>
+                  </p>
+                  <p class="card-text" style="font-size: 15px">
+                    <img
+                      src="assets/images/marker-icon-2x-lightgreen.png"
+                      class="icon"
+                    /><b *ngIf="!productMoreThan021Checked" (click)="removeMoreThan021Prod()" class="legendPin"> more than 0.21 kW</b>
+                      <s *ngIf="productMoreThan021Checked" (click)="addMoreThan021Prod()" class="legendPin"><b> more than 0.21 kW</b></s>
+                  </p>
+                  <p
+                    class="position-absolute bottom-0 start-3"
+                    style="font-size: 13px"
+                  >
+                    <i>Measured at {{ currentHour }}h</i>
+                  </p>
+                </div>
+              </div>
+              <div
+                class="card mx-0 my-0"
+                style="
+                  width: 85%;
+                  height: 10%;
+                  border-radius: 5%;
+                  background-color: rgb(236, 236, 238);
+                "
+              >
+                <div class="card-body" style="padding-top: 0">
+                  <p
+                    class="card-subtitle legendPin"
+                    style="font-size: 82%; margin-top: 4%"
+                    *ngIf="!equalConsumpProduct"
+                    (click)="removeEqualConsProd()"
+                  >
+                    <img
+                      src="assets/images/marker-icon-2x-blueviolet.png"
+                      class="icon"
+                    />
+                    Approximately equal current consumption and production
+                  </p>
+                  <p
+                    class="card-subtitle legendPin"
+                    style="font-size: 82%; margin-top: 4%"
+                    *ngIf="equalConsumpProduct"
+                    (click)="addEqualConsProd()"
+                  >
+                    <img
+                      src="assets/images/marker-icon-2x-blueviolet.png"
+                      class="icon"
+                    />
+                    <s> Approximately equal current consumption and production</s>
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-popup-add></app-popup-add>
+<app-popup-emp></app-popup-emp>
+<app-worker-profile></app-worker-profile>

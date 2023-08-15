@@ -1,0 +1,9 @@
+@media (min-width: 768px) {
+    .h-md-100 {
+        height: 100% !important;
+    }
+   
+}
+.btn-close{
+    background-color: white;
+}

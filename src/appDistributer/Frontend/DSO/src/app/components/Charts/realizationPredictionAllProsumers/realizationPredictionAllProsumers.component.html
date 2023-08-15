@@ -1,0 +1,156 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0)"
+  size="medium"
+  color="black"
+  type="ball-clip-rotate"
+  [showSpinner]="show"
+  [fullScreen]="false"
+  *ngIf="show"
+  [name]="'spiner1'"
+></ngx-spinner>
+
+<div>
+  <div
+    class="card-header pb-0 pt-3 bg-transparent row"
+    style="margin-left: 0; margin-right: 0"
+  >
+    <div
+      class="col-5"
+      style="
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+      "
+    >
+      <h6 class="m-0 font-weight-bold ps-2">
+        Realization and Prediction &nbsp;
+
+        <button
+          class="btn btn-outline-primary p-0 px-1"
+          [class.active]="activeChartType === 'line'"
+          (click)="HistoryData(activePeriod, activeServiceFunction, 'line')"
+        >
+          <i class="fa fa-line-chart"></i>
+        </button>
+        <button
+          class="btn btn-outline-primary mx-1 p-0 px-1"
+          [class.active]="activeChartType === 'bar'"
+          (click)="HistoryData(activePeriod, activeServiceFunction, 'bar')"
+        >
+          <i class="fa fa-bar-chart"></i>
+        </button>
+        <button
+          class="btn btn-outline-primary p-0 px-1"
+          data-bs-toggle="modal"
+          data-bs-target="#realizationAndPredictionTable"
+        >
+          <i class="fa fa-table"></i>
+        </button>
+      </h6>
+    </div>
+    <div
+      class="col-7 group"
+      style="
+        display: flex;
+        justify-content: right;
+        margin: auto;
+        padding-bottom: 2px;
+      "
+    >
+      <button
+        class="btn btn-primary realizationpredictionbtn"
+        id="realizpred1"
+        (click)="HistoryWeek('realizpred1')"
+        style="margin: 1px"
+        type="button"
+      >
+        Now
+      </button>
+      <button
+        class="btn btn-primary realizationpredictionbtn"
+        id="realizpred2"
+        (click)="HistoryMonth('realizpred2')"
+        style="margin: 1px"
+        type="button"
+      >
+        1 Month
+      </button>
+      <button
+        class="btn btn-primary realizationpredictionbtn"
+        id="realizpred3"
+        (click)="HistoryYear('realizpred3')"
+        type="button"
+        style="margin: 1px"
+      >
+        1 Year
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div style="width: 100%; margin: 0 auto; margin-top: 1%; height: 80%">
+      <ul id="legendContainer"></ul>
+      <canvas
+        *ngIf="data.length != 0"
+        id="chartCanvasHistoryPredictionAll"
+        style="height: 450px !important; width: 100% !important"
+      ></canvas>
+
+      <h1
+        *ngIf="!data"
+        style="
+          text-align: center;
+          margin-top: 15%;
+          opacity: 20%;
+          font-style: italic;
+          font-weight: normal;
+        "
+      >
+        There is no available Data
+      </h1>
+    </div>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="realizationAndPredictionTable"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="realizationAndPredictionTableLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-xl">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #5875a1">
+        <h5 class="modal-title" id="realizationAndPredictionTableLabel">
+          Realization and Prediction Table
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body pt-0"
+        style="overflow-y: auto; overflow-x: hidden"
+        id="modalFadeRealizationPredictionAllProsumers"
+      >
+        <app-realization-prediction-all-prosumers-table
+          [data]="data"
+        ></app-realization-prediction-all-prosumers-table>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="exportTable(data)"
+        >
+          Export Table
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,129 @@
+.off {
+  color: red;
+  font-size: 24px;
+}
+.on {
+  color: green;
+  font-size: 24px;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+#tabela {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.5;
+}
+a {
+  text-decoration: none;
+}
+.container {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container .row {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#cards {
+  flex-wrap: wrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.card {
+  flex: 1 1 20rem;
+  display: flex;
+  align-items: center;
+  margin: 8px 10px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+  flex-direction: column;
+  align-self: normal;
+  max-width: 20%;
+  min-width: 220px;
+  background: #e5f5ed;
+  box-shadow: 4px 5px 10px #59747f;
+  border-radius: 20px;
+  font-family: "Roboto";
+  color: #08376b;
+  margin-right: 10px auto;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+}
+
+.card img {
+  width: 50px;
+  height: 50px;
+  padding: 2px;
+}
+
+.card h4 {
+  color: #08376b;
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+  color: #08376b;
+  margin: 3px 0;
+  font-weight: bold;
+  padding: 2px;
+}
+.card h5 {
+  color: #08376b;
+  font-size: 18px;
+  font-weight: normal;
+  padding: 2px;
+}
+
+.card p {
+  margin-bottom: 10px;
+  color: #08376b;
+}
+
+#rowCheck {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2%;
+  padding: 2px;
+}
+@media only screen and (max-width: 850px) {
+  #rowCheck {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 2%;
+  }
+
+}
+@media only screen and (max-width: 480px) {
+
+  .card{
+    max-width: 20%;
+    min-width:260px;
+    min-height:140px;
+  }
+}
+
+::ng-deep .mat-slide-toggle-thumb {
+  background-color: green;
+}
+
+::ng-deep .mat-slide-toggle-bar {
+  background-color: green;
+}
+
+::ng-deep .mat-slide-toggle-background {
+  background-color: lightgray;
+}

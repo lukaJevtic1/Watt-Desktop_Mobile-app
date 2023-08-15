@@ -1,0 +1,170 @@
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round"
+/>
+<link
+  rel="stylesheet"
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+/>
+<link
+  rel="stylesheet"
+  href="https://fonts.googleapis.com/icon?family=Material+Icons"
+/>
+<link
+  rel="stylesheet"
+  href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+<script>
+  $(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
+    // Animate select box length
+    var searchInput = $(".search-box input");
+    var inputGroup = $(".search-box .input-group");
+    var boxWidth = inputGroup.width();
+    searchInput
+      .focus(function () {
+        inputGroup.animate({
+          width: "300",
+        });
+      })
+      .blur(function () {
+        inputGroup.animate({
+          width: boxWidth,
+        });
+      });
+  });
+</script>
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.95)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate"
+  [showSpinner]="true"
+  [fullScreen]="false"
+  ><p style="font-size: 25px; color: white">Loading Data...</p></ngx-spinner
+>
+<div class="container-fluid">
+  <div class="table-responsive">
+    <div class="table-wrapper">
+      <div class="table-title">
+        <div class="row" style="margin-bottom: 2%">
+          <div class="col-sm-3">
+            <h2 class="text-center"><b>User Overview</b></h2>
+          </div>
+          <div class="col-sm-2" style="margin-left: 40%">
+            <div class="search-box" style="margin-right: 1%">
+              <div class="input-group">
+                <span class="input-group-addon"
+                  ><i class="material-icons" style="margin-left: 2%"></i></span
+                >
+                <input
+                  type="text"
+                  [(ngModel)]="searchName"
+                  style="background-color: #f8f8fa; border-radius: 10px"
+                  class="form-control"
+                  placeholder="By Name"
+                />
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-2">
+            <div class="search-box">
+              <div class="input-group">
+                <span class="input-group-addon"
+                  ><i class="material-icons" style="margin-left: 2%"></i></span
+                >
+                <input
+                  type="text"
+                  [(ngModel)]="searchAddress"
+                  style="background-color: #f8f8fa; border-radius: 10px"
+                  class="form-control"
+                  placeholder="By Address"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <!-- <th></th> -->
+              <th (click)="sort('username')">Name<i class="fa fa-sort"></i></th>
+              <th (click)="sort('address')">
+                Address<i class="fa fa-sort"></i>
+              </th>
+
+              <th (click)="sort('consumption')">
+                Consumption <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="sort('production')">
+                Production <i class="fa fa-sort"></i>
+              </th>
+              <th (click)="sort('devCount')">
+                Number of devices <i class="fa fa-sort"></i>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              routerLink="/DsoApp/user/{{ item.id }}"
+              style="cursor: pointer"
+              *ngFor="
+                let item of serviceDevice.prosumers
+                  | orderBy : orderHeader : isDescOrder
+                  | search : searchName
+                  | searchaddress : searchAddress
+                  | paginate
+                    : {
+                        itemsPerPage: perPage,
+                        currentPage: page,
+                        totalItems: total
+                      };
+                let i = index
+              "
+            >
+              <!-- <td>
+                <img
+                  [src]="Image(item.image)"
+                  style="width: 30px; height: 30px"
+                  class="rounded-circle"
+                />
+              </td> -->
+              <td>{{ item.firstname }} {{ item.lastname }}</td>
+              <td>
+                {{ item.address }}, {{ item.neigborhoodName }},
+                {{ item.cityName }}
+              </td>
+
+              <td>{{ item.consumption.toFixed(2) }} kW</td>
+              <td>{{ item.production.toFixed(2) }} kW</td>
+              <td>{{ item.devCount }}</td>
+            </tr>
+          </tbody>
+        </table>
+        <div
+          style="
+            float: left;
+            padding-left: 30%;
+            margin-top: 1.5%;
+            position: fixed;
+            bottom: 0;
+          "
+        >
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          >
+          </pagination-controls>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-popup-add></app-popup-add>
+<app-popup-emp></app-popup-emp>
+<app-worker-profile></app-worker-profile>

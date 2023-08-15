@@ -1,0 +1,63 @@
+<div class="container mx-0 my-0 px-0 py-0 h-100">
+  <div class="row" style="margin: 0">
+    <div style="background-color: #59747f" class="h-100">
+      <div class="d-flex flex-column px-3 text-white text-left" id="sadrzaj">
+        <a
+          class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-white text-decoration-none"
+        >
+          <span class="fs-5 d-none d-sm-inline"></span>
+        </a>
+        <ul
+          class="nav nav-pills flex-column mb-sm-auto mb-0 justify-content-center px-0 w-100"
+          id="menu"
+        >
+          <li class="nav-item sidebarBtn align-items-center" id="sidebarHome">
+            <a class="nav-link align-middle text-center text-xl-start px-0" routerLink="home">
+              <i class="fs-4 bi-house"></i>&nbsp;<span
+                class="ms-1 d-none d-xl-inline"
+                >Home</span
+              >
+            </a>
+          </li>
+
+          <li class="nav-item sidebarBtn" id="sidebarUserDevices">
+            <a class="nav-link px-0 align-middle text-center text-xl-start" routerLink="userDevices">
+              <i class="fs-4 bi-grid-fill"></i>&nbsp;<span
+                class="ms-1 d-none d-xl-inline"
+                >View Devices</span
+              ></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link px-0 align-middle text-center text-xl-start" data-bs-toggle="modal" data-bs-target="#staticBackdrop1" style="cursor: pointer;">
+              <i class="fs-4 bi-plus-square"></i>&nbsp;<span
+                class="ms-1 d-none d-xl-inline"
+                >Add Device</span
+              ></a
+            >
+          </li>
+          <li class="nav-item sidebarBtn" id="sidebarUserInfo">
+            <a class="nav-link px-0 align-middle text-center text-xl-start" routerLink="userInfo">
+              <i class="fs-4 bi-person-circle"></i>&nbsp;<span
+                class="ms-1 d-none d-xl-inline"
+                >View Profile</span
+              >
+            </a>
+          </li>
+        </ul>
+        <button
+          class="btn nav-item mb-4 align-items-center justify-content-center justify-content-lg-start last"
+          (click)="logout()"
+        >
+          <a class="nav-link px-0 align-middle text-center text-xl-start">
+            <i class="fs-4 bi-box-arrow-right"></i>&nbsp;<span
+              class="ms-1 d-sm-none d-xl-inline"
+              >Logout</span
+            >
+          </a>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+

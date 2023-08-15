@@ -1,0 +1,138 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0)"
+  size="medium"
+  color="black"
+  type="ball-clip-rotate"
+  [showSpinner]="show"
+  [fullScreen]="false"
+  *ngIf="show"
+></ngx-spinner>
+<div
+  class="flex-grow-1 d-flex flex-column justify-content-center"
+  style="flex-basis: 50%"
+>
+  <div
+    class="card-header col-12 p-1 group"
+    style="
+      display: flex;
+      justify-content: right;
+      align-items: center;
+      margin: auto;
+    "
+  >
+    <div class="col-5 p-1">
+      <h6 class="m-0 font-weight-bold ps-2">
+        {{ type }} and Prediction History &nbsp;<button
+          class="btn btn-outline-primary p-0 px-1 m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#realizationDeviceTable"
+        >
+          <i class="fa fa-table"></i>
+        </button>
+      </h6>
+    </div>
+    <div
+      class="col-7"
+      style="display: flex; justify-content: right; align-items: center"
+    >
+      <button
+        class="btn btn-primary m-1 py-2 realizationDevicebtn"
+        id="realizDev1"
+        (click)="HistoryWeek('realizDev1')"
+      >
+        7D
+      </button>
+      <button
+        class="btn btn-primary m-1 py-2 realizationDevicebtn"
+        id="realizDev2"
+        (click)="HistoryMonth('realizDev2')"
+      >
+        1M
+      </button>
+      <button
+        class="btn btn-primary m-1 py-2 realizationDevicebtn"
+        id="realizDev3"
+        (click)="HistoryYear('realizDev3')"
+      >
+        1Y
+      </button>
+    </div>
+  </div>
+  <div class="card-body" style="width: 100%; margin: 0 auto">
+    <div
+      class="w-100 px-0 py-0 mx-0 my-0"
+      id="grafik"
+      style="display: flex; justify-content: center; align-items: center"
+    >
+      <h1
+        *ngIf="data.length == 0"
+        style="
+          text-align: center;
+          opacity: 60%;
+          font-style: italic;
+          font-weight: normal;
+          z-index: 100;
+        "
+      >
+        There Is No Available Data
+      </h1>
+      <canvas
+        id="RealizationDeviceChart"
+        style="height: 100% !important; width: 100% !important"
+      ></canvas>
+    </div>
+
+    <div
+      class="legend w-100 text-center"
+      *ngIf="production && consumption && data.length != 0"
+    >
+      <i class="fa fa-circle consumption" *ngIf="cat == '1'"
+        >&nbsp;Consumption</i
+      >&nbsp;&nbsp;&nbsp;
+      <i class="fa fa-circle production" *ngIf="cat == '2'">&nbsp;Production</i
+      >&nbsp;&nbsp;&nbsp;
+      <i class="fa fa-circle predictionConsumption" *ngIf="cat == '1'"
+        >&nbsp;Predicted</i
+      >
+      <i class="fa fa-circle predictionProduction" *ngIf="cat == '2'"
+        >&nbsp;Predicted</i
+      >
+    </div>
+  </div>
+</div>
+
+<div
+  class="modal fade"
+  id="realizationDeviceTable"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="realizationDeviceTableLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #466471">
+        <h6 class="modal-title" id="realizationDeviceTableLabel">
+          {{type}} and Prediction Table History
+        </h6>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body py-0 px-2" id="realizationDeviceTableModalBody" style="overflow-y: auto; overflow-x: hidden;">
+        <app-realization-device-table
+          [type]="type"
+          [data]="data"
+        ></app-realization-device-table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="exportTable()">
+          Export Table
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

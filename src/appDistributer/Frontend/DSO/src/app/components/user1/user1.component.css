@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css2?family=Audiowide&display=swap");
+
+.glavni {
+  display: flex;
+  width: 100%;
+  height: auto;
+}
+.naslov {
+  text-align: center;
+}
+.centralni {
+  padding-left: 45px;
+  padding-right: 45px;
+}
+.centralniGore {
+  display: flex;
+  width: 100%;
+  background-color: #f2f2f2;
+}
+.centralniDole {
+  width: 100%;
+}
+
+.clevo {
+  width: 33%;
+}
+.plevo {
+  color: 5875A1;
+  padding: 15px;
+  font-size: 18px;
+  margin-left: 30px;
+}
+.cdesno {
+  width: 33%;
+}
+.csredina {
+  position: relative;
+  width: 33%;
+  background-color: #f2f2f2;
+  text-align: center;
+}
+.pdesno {
+  font-size: 18px;
+  padding: 15px;
+}
+#edit {
+  /* width: 45%;
+        position:absolute; */
+  background-color: #5875a1;
+  color: white;
+  font-family: roboto;
+  /* bottom: 5px;
+    right: 5px;
+  height: 30px; */
+}
+#delete {
+  /* width: 45%;
+    height: 30px;
+    position:absolute; */
+  background-color: #5875a1;
+  color: white;
+  font-family: roboto;
+  /* bottom: 5px;
+    left: 5px; */
+}
+input, select {
+  border-radius: 7px;
+  background-color: #e8f3f8;
+
+  border: wheat;
+  width: 100%;
+  max-width: 500px;
+  height: 40px;
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.2), 0 6px 8px 0 rgba(0, 0, 0, 0.19);
+}
+p {
+  font-size: 20px;
+  margin-bottom: 0px;
+  font-family: roboto;
+  color: #5875a1;
+}
+
+#dugme {
+  background-color: #5875a1;
+  border-radius: 7px;
+  width: 40%;
+  float: right;
+  margin-top: 10px;
+  color: white;
+}
+
+.btn-close {
+  color: white;
+  background-color: white;
+}
+.card {
+  border: 0.5px solid rgba(0, 0, 0, 0.25);
+  border-radius: 15px;
+}

@@ -1,0 +1,212 @@
+<div *ngIf="isProducersChecked === true">
+  <div
+    class="card-header pb-0 pt-3 bg-transparent row"
+    style="margin-left: 0; margin-right: 0"
+  >
+    <div class="col-md-6 pb-2">
+      <h6 style="margin-bottom: 2px">
+        Current Production per City &nbsp;<button
+          class="btn btn-outline-primary p-0 px-1 m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#pieChartProsumersTable"
+        >
+          <i class="fa fa-table"></i>
+        </button>
+      </h6>
+    </div>
+    <div
+      class="col-6"
+      style="display: flex; justify-content: right; margin: auto; padding: 1px"
+    >
+      <div class="form-check mx-1">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption1"
+          id="consumersOption1"
+          (change)="onRadioButtonChange($event, 'consumers')"
+          [checked]="isConsumersChecked"
+        />
+        <label class="form-check-label" for="consumersOption1">
+          Consumption
+        </label>
+      </div>
+
+      <div class="form-check mx-1">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption1"
+          id="producersOption1"
+          (change)="onRadioButtonChange($event, 'producers')"
+          [checked]="isProducersChecked"
+        />
+        <label class="form-check-label" for="producersOption1">
+          Production
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div
+      style="width: 100%; margin: 0 auto; margin-top: 1%; height: 100%"
+      *ngIf="dataProducers.length != 0"
+    >
+      <ngx-charts-pie-grid
+        [results]="dataProducers"
+        [scheme]="colorScheme1"
+        [ariaLabel]="false"
+        [tooltipDisabled]="false"
+        [animations]="true"
+        [label]="'Production [kW]'"
+      >
+      </ngx-charts-pie-grid>
+      <p
+        class="position-absolute bottom-0 mb-0 text-center"
+        style="font-size: 14px; text-align: center; left: 0; right: 0"
+      >
+        <i>Measured at {{ currentHour }}h</i>
+      </p>
+    </div>
+    <h1
+      *ngIf="dataProducers.length === 0"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 400px;
+        opacity: 20%;
+        font-style: italic;
+        font-weight: normal;
+      "
+    >
+      There is no available Data
+    </h1>
+  </div>
+</div>
+<div *ngIf="isConsumersChecked === true">
+  <div
+    class="card-header pb-0 pt-3 bg-transparent row"
+    style="margin-left: 0; margin-right: 0"
+  >
+    <div class="col-md-6 pb-2">
+      <h6 class="text-capitalize" style="margin-bottom: 2px">
+        Current Consumption per City &nbsp;<button
+          class="btn btn-outline-primary p-0 px-1 m-0"
+          data-bs-toggle="modal"
+          data-bs-target="#pieChartProsumersTable"
+        >
+          <i class="fa fa-table"></i>
+        </button>
+      </h6>
+    </div>
+    <div
+      class="col-md-6"
+      style="display: flex; justify-content: right; margin: auto; padding: 1px"
+    >
+      <div class="form-check mx-1">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption1"
+          id="consumersOption1"
+          (change)="onRadioButtonChange($event, 'consumers')"
+          [checked]="isConsumersChecked"
+        />
+        <label class="form-check-label" for="consumersOption1">
+          Consumption
+        </label>
+      </div>
+
+      <div class="form-check mx-1">
+        <input
+          class="form-check-input"
+          type="radio"
+          name="radioOption1"
+          id="producersOption1"
+          (change)="onRadioButtonChange($event, 'producers')"
+          [checked]="isProducersChecked"
+        />
+        <label class="form-check-label" for="producersOption1">
+          Production
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="card-body p-0">
+    <div
+      style="width: 100%; margin: 0 auto; margin-top: 1%; height: 100%"
+      *ngIf="dataConsumers.length != 0"
+    >
+      <ngx-charts-pie-grid
+        [results]="dataConsumers"
+        [scheme]="colorScheme"
+        [ariaLabel]="true"
+        [tooltipDisabled]="false"
+        [animations]="true"
+        [label]="'Consumption [kW]'"
+      >
+      </ngx-charts-pie-grid>
+      <p
+        class="position-absolute bottom-0 mb-0 text-center"
+        style="font-size: 14px; text-align: center; left: 0; right: 0"
+      >
+        <i>Measured at {{ currentHour }}h</i>
+      </p>
+    </div>
+    <h1
+      *ngIf="!dataConsumers.length"
+      style="
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 400px;
+        opacity: 20%;
+        font-style: italic;
+        font-weight: normal;
+      "
+    >
+      There is no available Data
+    </h1>
+  </div>
+</div>
+<div
+  class="modal fade"
+  id="pieChartProsumersTable"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="pieChartProsumersTableLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered modal-lg">
+    <div class="modal-content">
+      <div class="modal-header text-white" style="background-color: #5875a1">
+        <h5 class="modal-title" id="pieChartProsumersTableLabel">
+          Current {{ currentTitle }} per City Table
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div
+        class="modal-body pt-0"
+        style="overflow-y: auto; overflow-x: hidden"
+        id="modalFadePieChartProsumers"
+      >
+        <app-pie-chart-prosumers-table
+          [currentData]="currentData"
+          [currentTitle]="currentTitle"
+        ></app-pie-chart-prosumers-table>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="exportTable()">
+          Export Table
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

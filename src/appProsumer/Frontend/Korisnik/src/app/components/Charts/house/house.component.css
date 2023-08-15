@@ -1,0 +1,97 @@
+.roof {
+  border-left: 100px solid transparent;
+  border-right: 100px solid transparent;
+  border-bottom: 100px solid #c1dfd5;
+}
+.walls {
+  background-color: #c1dfd5;
+  overflow: hidden;
+}
+.card {
+  flex: 1 1 20rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* margin: 5px 10px; */
+  flex-direction: column;
+  align-self: normal;
+  /* max-width: 23%;
+  max-height: 23%; */
+  font-family: "Roboto";
+  color: #08376b;
+  margin: 1%;
+}
+.card-footer{
+  text-align: center;
+  padding-right: 0;
+  padding-left: 0;
+}
+.device-name{
+  max-width: 97%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: inline-block;
+}
+.text-container {
+  width: 100%;
+  text-align: center;
+}
+.text-container a {
+  max-width: 96%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+@media only screen and (min-width: 768px) {
+  .card img {
+    width: 100%;
+  }
+}
+@media (min-width: 576px) {
+  #houseDeviceInfo {
+    text-align: start;
+  }
+}
+@media only screen and (max-width: 768px) {
+  .card img {
+    width: 40%;
+  }
+}
+@media (max-width: 576) {
+  #houseDeviceInfo {
+    text-align: center !important;
+  }
+}
+.activeDevice {
+  color: #8ee5c9;
+}
+.inactiveDevice {
+  color: #d0d0d0;
+}
+.off {
+  color: red;
+  font-size: 100px;
+}
+.on {
+  color: green;
+  font-size: 100px;
+}
+.visit {
+  font-size: 100px;
+}
+.charge{
+  color: #08376b;
+  font-size: 100px;
+}
+.faBtn{
+  cursor: pointer;
+  border: 2px solid rgb(246, 255, 251);
+  border-radius: 10px;
+  background-color: #ebf5f1;
+}
+.faBtn:hover{
+  background-color: #d9dfdd;
+  border-color: #d9dfdd;
+  border-radius: 10px;
+}

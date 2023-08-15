@@ -1,0 +1,249 @@
+<ngx-spinner
+  bdColor="rgba(0, 0, 0, 0.95)"
+  size="medium"
+  color="#fff"
+  type="ball-clip-rotate"
+  [showSpinner]="true"
+  [fullScreen]="true"
+  [zIndex]="9999"
+  ><p style="font-size: 25px; color: white">Loading Data...</p></ngx-spinner
+>
+
+<div
+  style="position: sticky; top: -1px; z-index: 1000; background-color: #e0efea"
+  class="pb-0 mt-0"
+>
+  <h1
+    style="
+      margin: 0% 2% 1% 2%;
+      font-family: Rhodium Libre;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 32px;
+      line-height: 55px;
+      letter-spacing: 0.03em;
+      text-align: center;
+      color: #08376b;
+      font-weight: bold;
+    "
+  >
+    USER DEVICES
+  </h1>
+  <hr class="my-md-3 my-2" />
+  <div class="row px-0 mb-md-3 mb-2" id="rowCheck">
+    <div
+      class="col-lg-2 col-4 justify-content-end justify-content-md-center px-0"
+      style="display: flex; font-weight: bold"
+    >
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="1"
+          id="flexCheckDefault"
+          [(ngModel)]="consumers"
+          (change)="filterDevices()"
+          style="
+            background-color: #c14b48;
+            border-color: #59747f;
+            margin-top: 6%;
+          "
+        />
+        <label
+          class="form-check-label"
+          for="flexCheckDefault"
+          style="color: #c14b48"
+          >Consumers</label
+        >
+        <!-- #59747f -->
+      </div>
+    </div>
+    <div
+      class="col-lg-2 col-4 justify-content-end justify-content-md-center px-0"
+      style="display: flex; font-weight: bold"
+    >
+      <div class="form-check">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="2"
+          id="flexCheckDefault1"
+          [(ngModel)]="producers"
+          (change)="filterDevices()"
+          style="
+            margin-top: 6%;
+            background-color: #48c1a3;
+            border-color: #59747f;
+          "
+        />
+        <label
+          class="form-check-label"
+          for="flexCheckDefault1"
+          style="color: #48c1a3"
+          >Producers</label
+        >
+        <!-- #59747f -->
+      </div>
+    </div>
+    <div
+      class="col-lg-2 col-4 justify-content-end justify-content-md-center px-0"
+      style="display: flex; font-weight: bold"
+    >
+      <div class="form-check" style="margin-right: 10%">
+        <input
+          class="form-check-input"
+          type="checkbox"
+          value="3"
+          id="flexCheckDefault2"
+          [(ngModel)]="storages"
+          (change)="filterDevices()"
+          style="
+            margin-top: 6%;
+            background-color: #2a96d9;
+            border-color: #59747f;
+          "
+        />
+        <label
+          class="form-check-label"
+          for="flexCheckDefault2"
+          style="color: #2a96d9"
+          >Storage</label
+        >
+        <!-- #59747f -->
+      </div>
+    </div>
+  </div>
+  <hr class="mb-2" />
+</div>
+
+<div id="tabela" style="overflow-y: auto">
+  <div class="container" style="display: flex; justify-content: center">
+    <div
+      class="row"
+      style="width: 100%; display: flex; justify-content: center"
+    >
+      <div
+        class="card p-1"
+        *ngFor="let device of devicesToShow"
+        (click)="navigateToDevice(device.Id)"
+        [ngStyle]="{
+          'border-left':
+            device.CategoryId == '1'
+              ? '3px solid #c14b48'
+              : device.CategoryId == '2'
+              ? '3px solid #48c1a3'
+              : '3px solid #2a96d9'
+        }"
+      >
+        <table style="margin: 3%; width: 95%; margin: auto; height: 95%">
+          <tr style="display: flex; justify-content: space-between">
+            <span class="col-3" [ngSwitch]="device.TypeId">
+              <div *ngSwitchCase="'1'">
+                <img src="assets/images/fridge.png" />
+              </div>
+              <div *ngSwitchCase="'2'">
+                <img src="assets/images/tv.png" />
+              </div>
+              <span *ngSwitchCase="'3'"
+                ><img src="assets/images/oven.png"
+              /></span>
+              <span *ngSwitchCase="'4'"
+                ><img src="assets/images/air-conditioner.png"
+              /></span>
+              <span *ngSwitchCase="'5'"
+                ><img src="assets/images/microwave.png"
+              /></span>
+              <span *ngSwitchCase="'6'"
+                ><img src="assets/images/dish-washer.png"
+              /></span>
+              <span *ngSwitchCase="'7'"
+                ><img src="assets/images/coffee-machine.png"
+              /></span>
+              <span *ngSwitchCase="'8'"
+                ><img src="assets/images/pc.png"
+              /></span>
+              <span *ngSwitchCase="'9'"
+                ><img src="assets/images/washing-machine.png"
+              /></span>
+              <span *ngSwitchCase="'10'"
+                ><img src="assets/images/dryer-machine.png"
+              /></span>
+              <span *ngSwitchCase="'11'"
+                ><img src="assets/images/vacuum-cleaner.png"
+              /></span>
+              <span *ngSwitchCase="'12'"
+                ><img src="assets/images/iron.png"
+              /></span>
+              <span *ngSwitchCase="'13'"
+                ><img src="assets/images/dryer.png"
+              /></span>
+              <span *ngSwitchCase="'14'"
+                ><img src="assets/images/water-heater.png"
+              /></span>
+              <span *ngSwitchCase="'15'"
+                ><img src="assets/images/kettle.png"
+              /></span>
+              <span *ngSwitchCase="'16'"
+                ><img src="assets/images/station-charging.png"
+              /></span>
+              <span *ngSwitchCase="'17'"
+                ><img src="assets/images/playstation.png"
+              /></span>
+              <span *ngSwitchCase="'18'"
+                ><img src="assets/images/smart-heater.png"
+              /></span>
+              <span *ngSwitchCase="'19'"
+                ><img src="assets/images/solar-panel.png"
+              /></span>
+              <span *ngSwitchCase="'20'"
+                ><img src="assets/images/windmill.png"
+              /></span>
+              <span *ngSwitchCase="'21'"
+                ><img src="assets/images/battery-2.png"
+              /></span>
+            </span>
+            <span style="width: 50%" [ngSwitch]="device.CategoryId">
+              <h5 *ngSwitchCase="'1'" style="text-align: right">Consumption</h5>
+              <h5 *ngSwitchCase="'2'" style="text-align: right">Production</h5>
+              <h5 *ngSwitchCase="'3'" style="text-align: right">Storage</h5>
+              <h5 style="text-align: right">
+                {{ device.CurrentUsage.toFixed(2) }} kW
+              </h5>
+            </span>
+          </tr>
+
+          <tr>
+            <td>
+              <h4>{{ device.Name }}</h4>
+            </td>
+          </tr>
+          <tr
+            style="display: flex; justify-content: space-between; width: 100%"
+          >
+            <h5 class="h">IP {{ device.IpAddress }}</h5>
+            <ng-template #offToggle>
+              <div
+                class="form-check form-switch ps-0"
+                style="color: red; font-weight: bold"
+              >
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >Inactive</label
+                >
+              </div>
+            </ng-template>
+            <div *ngIf="device.Activity != 0; else offToggle">
+              <div
+                class="form-check form-switch ps-0"
+                style="color: green; font-weight: bold"
+              >
+                <label class="form-check-label" for="flexSwitchCheckDefault"
+                  >Active</label
+                >
+              </div>
+            </div>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

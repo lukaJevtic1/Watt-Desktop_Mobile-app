@@ -1,0 +1,29 @@
+<table class="table table-striped">
+  <thead style="position: sticky; top: 0px; background-color: white">
+    <tr class="text-center">
+      <th scope="col"></th>
+      <th scope="col text-center">{{ type }} [kWh]</th>
+      <th scope="col text-center">Predicted [kWh]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let value of data[0]?.values; let i = index">
+      <th scope="row" class="ps-2">{{ value.x }}</th>
+      <td
+        class="text-center"
+        [ngStyle]="{ color: type === 'Consumption' ? 'rgba(193, 75, 72, 1)' : 'rgba(128, 188, 0, 1)' }"
+      >
+        {{ value.y.toFixed(2) }}
+      </td>
+      <td
+        class="text-center"
+        [ngStyle]="{
+          color:
+            type === 'Consumption' ? 'rgba(255, 125, 65, 1)' : 'rgba(0, 188, 179, 1)'
+        }"
+      >
+        {{ data[1].values[i].y.toFixed(2) }}
+      </td>
+    </tr>
+  </tbody>
+</table>

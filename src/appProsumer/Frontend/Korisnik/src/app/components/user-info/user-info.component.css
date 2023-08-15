@@ -1,0 +1,62 @@
+.gradient-custom {
+    background: #E0EFEA;
+    /*  */
+}
+@media (min-width: 768px) {
+    .h-md-100 {
+        height: 100% !important;
+    }
+}
+@media (max-width: 576px) {
+    #showChangeImage{
+        width: 70% !important;
+    }
+    #userInfoProfilePhoto{
+        width: 50% !important;
+    }
+}
+/* @media (min-width: 576) {
+    #showChangeImage{
+        width: 80% !important;
+    }
+    #userInfoProfilePhoto{
+        width: 50px !important;
+    }
+} */
+.btn{
+    background: #7E939C;
+    border-color: #7E939C;
+    box-shadow: #0000;
+    color: #ffff;
+}
+.section{
+    color: #7E939C;
+}
+.text-muted{
+    color: #7E939C;
+}
+.btn-secondary{
+    background-color: #8D021F;
+    border-color: #8D021F;
+}
+a {
+    color: #59747f;
+}
+#changeImageLink {
+    text-decoration: underline;
+    cursor: pointer;
+}
+.btn-close{
+    background-color: white;
+}
+
+#deleteImageUserInfo{
+    background-color: #8D021F;
+}
+#confirmImageChangeUserInfo{
+    background-color: #466471;
+}
+
+.infoUser{
+    color: #08376b;
+}

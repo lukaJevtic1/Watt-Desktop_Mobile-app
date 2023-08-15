@@ -1,0 +1,47 @@
+<div id="side" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark">
+  <input
+    type="button"
+    value="X"
+    style="
+      background-color: #5875a1;
+      width: 30px;
+      border: 0px;
+      color: white;
+      margin-left: 5px;
+      margin-top: 7px;
+    "
+  />
+  <div class="informacije">
+    <img
+      src="assets/images/user.png"
+      style="width: 100px; height: 100px; margin-top: 50px"
+    />
+    <h2 id="ime">{{ ime }}</h2>
+    <h6 id="adresa">{{ adresa }}</h6>
+  </div>
+
+  <div class="div1">
+    <input
+      id="prvodugme"
+      class="dugme"
+      type="button"
+      value="User Information"
+      routerLink="/DsoApp/user/{{ id }}"
+    />
+    <br />
+    <input
+      class="dugme"
+      type="button"
+      value="User Devices"
+      routerLink="/DsoApp/user/{{ id }}/Devices"
+    /><br />
+    <div *ngIf="letValue === 'Dso'">
+      <input
+        class="dugme"
+        type="button"
+        value="Delete User"
+        (click)="DeleteUser()"
+      />
+    </div>
+  </div>
+</div>
